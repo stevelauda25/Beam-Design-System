@@ -29,4 +29,5 @@ export * from './dialog/index.js';
 export * from './share-popover/index.js';
 export * from './editor-toolbar/index.js';
 export * from './activity/index.js';
+export * from './tabs/index.js';
 export { cn } from './lib/cn.js';

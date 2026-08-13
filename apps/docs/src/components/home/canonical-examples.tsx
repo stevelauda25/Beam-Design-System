@@ -1,5 +1,5 @@
 import { useState, type ComponentType } from 'react';
-import { Activity, Badge, Breadcrumb, Button, Dialog, Dropdown, EditorToolbar, FileCard, Menu, MenuItem, NavigationButton, Select, SharePopover, Table, TextInput, Toast, Tooltip } from '@beam/ui';
+import { Activity, Badge, Breadcrumb, Button, Dialog, Dropdown, EditorToolbar, FileCard, Menu, MenuItem, NavigationButton, Select, SharePopover, Table, Tabs, TextInput, Toast, Tooltip } from '@beam/ui';
 import folderIcon from '../../assets/beam-app/folder.svg';
 import selectChevron from '../../assets/beam-app/api-chevron.svg';
 import selectedCheck from '../../assets/beam-app/download-success.svg';
@@ -21,6 +21,8 @@ import shareChevron from '../../assets/beam-app/share-chevron.svg';
 import jamesAvatar from '../../assets/beam-app/james-avatar.png';
 import activityLine from '../../assets/beam-app/activity-line.svg';
 import toastSuccess from '../../assets/beam-app/toast-success.svg';
+import viewList from '../../assets/beam-app/view-list.svg';
+import viewGrid from '../../assets/beam-app/view-grid.svg';
 
 export function BreadcrumbExample() {
   return (
@@ -110,14 +112,16 @@ export function MenuExample() {
 
 export function TableExample() {
   return (
-    <Table
-      className="w-[230px]"
-      rows={[
-        { name: 'Folder 001', size: '2.4KB', modified: '5 days', state: 'default' },
-        { name: 'Website Assets', size: '856MB', modified: 'Yesterday', state: 'selected' },
-      ]}
-      actionIcon={<img src={moreIcon} alt="" />}
-    />
+    <div className="w-fit origin-center scale-[0.8]">
+      <Table
+        className="w-[286px]"
+        rows={[
+          { name: 'Folder 001', size: '2.4KB', modified: '5 days', state: 'default' },
+          { name: 'Website Assets', size: '856MB', modified: 'Yesterday', state: 'selected' },
+        ]}
+        actionIcon={<img src={moreIcon} alt="" />}
+      />
+    </div>
   );
 }
 
@@ -134,18 +138,24 @@ export function FileCardExample() {
 }
 
 export function DialogExample() {
-  return <Dialog title="Create new folder" closeIcon={<img src={closeIcon} alt=""/>} primaryIcon={<img src={folderIcon} alt=""/>} primaryLabel="Add folder">Folder name</Dialog>;
+  return (
+    <div className="origin-center scale-[0.8]">
+      <Dialog className="w-[300px]" title="Create new folder" closeIcon={<img src={closeIcon} alt=""/>} primaryIcon={<img src={folderIcon} alt=""/>} primaryLabel="Add folder">Folder name</Dialog>
+    </div>
+  );
 }
 
 export function PopoverExample() {
   return (
-    <SharePopover
-      pointer={<img src={sharePointer} alt=""/>}
-      documentIcon={<img src={shareDocument} alt=""/>}
-      peopleIcon={<img src={sharePeople} alt=""/>}
-      avatar={<img src={jamesAvatar} alt=""/>}
-      footerIcon={<img src={shareChevron} alt=""/>}
-    />
+    <div className="origin-center scale-[0.8]">
+      <SharePopover
+        pointer={<img src={sharePointer} alt=""/>}
+        documentIcon={<img src={shareDocument} alt=""/>}
+        peopleIcon={<img src={sharePeople} alt=""/>}
+        avatar={<img src={jamesAvatar} alt=""/>}
+        footerIcon={<img src={shareChevron} alt=""/>}
+      />
+    </div>
   );
 }
 
@@ -183,6 +193,10 @@ export function ToastExample() {
   return <Toast variant="success" icon={<img src={toastSuccess} alt="" />} title="API key created" description="Production API was created successfully." />;
 }
 
+export function TabsExample() {
+  return <Tabs value="grid" listIcon={<img src={viewList} alt="" />} gridIcon={<img src={viewGrid} alt="" />} />;
+}
+
 export const canonicalExamples: Record<string, ComponentType> = {
   '/components/button': ButtonExample,
   '/components/text-input': TextInputExample,
@@ -198,4 +212,5 @@ export const canonicalExamples: Record<string, ComponentType> = {
   '/components/tooltip': TooltipExample,
   '/components/toast': ToastExample,
   '/components/navigation': NavigationExample,
+  '/components/tabs': TabsExample,
 };

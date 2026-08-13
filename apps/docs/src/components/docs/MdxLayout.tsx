@@ -27,9 +27,11 @@ export function MdxLayout({ children }: { children: ReactNode }) {
     '/components/activity',
     '/components/tooltip',
     '/components/toast',
+    '/components/tabs',
   ].includes(pathname);
   const contentClass = cn(
     'mdx-content',
+    pathname === '/getting-started' && 'getting-started-page',
     isBeamComponent && 'beam-theme',
     usesCompactSpecLayout && 'compact-spec-page',
   );

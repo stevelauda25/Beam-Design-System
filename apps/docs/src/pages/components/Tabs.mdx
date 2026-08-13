@@ -1,0 +1,47 @@
+import { Tab } from '@beam/ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+
+export const CircleIcon = () => <span className="block size-3 rounded-full border border-current" />;
+
+<PageHeader title="Tab" description="The List and Grid view switcher used in Beam-App-Project." />
+
+## States
+
+<PreviewCard compact>
+  <div className="flex items-start justify-center gap-12">
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-fit rounded-[6px] border-[0.5px] border-black/10 bg-[rgb(var(--color-gray-50))] p-0.5">
+        <Tab selected icon={<CircleIcon />}>Tab</Tab>
+      </div>
+      <span className="text-xs font-normal leading-[18px] text-[rgb(var(--color-gray-600))]">Selected</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-fit rounded-[6px] border-[0.5px] border-black/10 bg-[rgb(var(--color-gray-50))] p-0.5">
+        <Tab icon={<CircleIcon />}>Tab</Tab>
+      </div>
+      <span className="text-xs font-normal leading-[18px] text-[rgb(var(--color-gray-600))]">Not selected</span>
+    </div>
+  </div>
+</PreviewCard>
+
+## Complete tabs
+
+<PreviewCard compact>
+  <div className="flex w-fit rounded-[6px] border-[0.5px] border-black/10 bg-[rgb(var(--color-gray-50))] p-0.5">
+    <Tab icon={<CircleIcon />}>Tab</Tab>
+    <Tab selected icon={<CircleIcon />}>Tab</Tab>
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Container padding</th><td>2px</td></tr>
+  <tr><th>Container radius</th><td>6px</td></tr>
+  <tr><th>Tab height</th><td>22px</td></tr>
+  <tr><th>Tab padding</th><td>2px 8px</td></tr>
+  <tr><th>Gap</th><td>6px</td></tr>
+  <tr><th>Icon</th><td>12px</td></tr>
+  <tr><th>Active radius</th><td>4px</td></tr>
+  <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

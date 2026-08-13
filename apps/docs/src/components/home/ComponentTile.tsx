@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import type { HTMLAttributes } from 'react';
 import { cn } from '@beam/ui';
 import type { RouteEntry } from '../../lib/routes.js';
 import { canonicalExamples } from './canonical-examples.js';
@@ -6,6 +7,8 @@ import { canonicalExamples } from './canonical-examples.js';
 interface Props {
   entry: RouteEntry;
 }
+
+const inertPreviewProps = { inert: '' } as unknown as HTMLAttributes<HTMLDivElement>;
 
 export function ComponentTile({ entry }: Props) {
   const isReady = entry.status === 'ready';
@@ -36,8 +39,10 @@ export function ComponentTile({ entry }: Props) {
         )}
       </Link>
       <div
+        {...inertPreviewProps}
+        aria-hidden="true"
         className={cn(
-          'flex flex-1 items-center justify-center px-6',
+          'flex flex-1 items-center justify-center px-6 pointer-events-none select-none',
           !isReady && 'opacity-40',
         )}
       >

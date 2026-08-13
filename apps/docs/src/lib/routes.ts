@@ -38,6 +38,7 @@ export const routes: RouteEntry[] = [
   { path: '/components/tooltip',            label: 'Tooltip',            category: 'component', status: 'ready', description: 'Compact feedback tooltip.', load: () => import('../pages/components/Tooltip.mdx') },
   { path: '/components/toast',              label: 'Toast',              category: 'component', status: 'ready', description: 'Status notification.',      load: () => import('../pages/components/Toast.mdx') },
   { path: '/components/navigation',         label: 'Navigation',         category: 'component', status: 'ready', description: 'Atomic navigation family.', load: () => import('../pages/components/Navigation.mdx') },
+  { path: '/components/tabs',               label: 'Tab',                category: 'component', status: 'ready', description: 'List and grid view tabs.',   load: () => import('../pages/components/Tabs.mdx') },
 
   // Resources
   { path: '/changelog', label: 'Changelog', category: 'resource', load: () => import('../pages/Changelog.mdx') },

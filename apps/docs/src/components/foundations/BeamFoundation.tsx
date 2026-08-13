@@ -12,7 +12,7 @@ import { PropsTable } from '../docs/PropsTable.js';
 type RampName = 'neutral' | 'accent-gray-aqua' | 'success' | 'warning' | 'error' | 'info' | 'gray' | 'alpha-black' | 'alpha-white';
 
 /** One color ramp (e.g. neutral-25 → neutral-950) as a swatch grid. */
-export function BeamColorRamp({ ramp }: { ramp: RampName }) {
+export function BeamColorRamp({ ramp, inverse = false }: { ramp: RampName; inverse?: boolean }) {
   const shades = tokens.color[ramp];
   return (
     <div className="my-0 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -24,10 +24,10 @@ export function BeamColorRamp({ ramp }: { ramp: RampName }) {
             aria-hidden="true"
           />
           <div className="flex min-w-0 flex-col">
-            <span className="font-sans text-xs font-normal uppercase leading-[18px] text-[#201b18]">
+            <span className={`font-sans text-xs font-normal uppercase leading-[18px] ${inverse ? 'text-white' : 'text-[#201b18]'}`}>
               {ramp}-{shade}
             </span>
-            <span className="text-xs leading-[18px] text-[#a3a3a3]">{hex}</span>
+            <span className={`text-xs font-normal leading-[18px] ${inverse ? 'text-white' : 'text-[#a3a3a3]'}`}>{hex}</span>
           </div>
         </div>
       ))}

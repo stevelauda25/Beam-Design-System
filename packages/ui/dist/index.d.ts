@@ -613,6 +613,24 @@ interface ActivityProps {
 }
 declare function Activity({ items, lineAsset, className }: ActivityProps): react.JSX.Element;
 
+type TabsValue = 'list' | 'grid';
+interface TabsProps {
+    value?: TabsValue;
+    onValueChange?: (value: TabsValue) => void;
+    listIcon: ReactNode;
+    gridIcon: ReactNode;
+    className?: string;
+}
+interface TabProps {
+    selected?: boolean;
+    icon: ReactNode;
+    children: ReactNode;
+    onClick?: () => void;
+    className?: string;
+}
+declare function Tab({ selected, icon, children, onClick, className }: TabProps): react.JSX.Element;
+declare function Tabs({ value, onValueChange, listIcon, gridIcon, className }: TabsProps): react.JSX.Element;
+
 declare function cn(...inputs: ClassValue[]): string;
 
-export { AccountSwitcher, type AccountSwitcherProps, Activity, type ActivityItem, type ActivityItemState, type ActivityProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BadgeVariant, Breadcrumb, type BreadcrumbItem, type BreadcrumbProps, Button, type ButtonProps, type ButtonState, Dialog, type DialogProps, type DialogVariant, Dropdown, type DropdownOption, type DropdownProps, type DropdownSize, EditorToolbar, type EditorToolbarIcons, type EditorToolbarProps, type EditorToolbarState, EmptyState, type EmptyStateActionVariant, type EmptyStateMedia, type EmptyStateProps, FileCard, type FileCardProps, type FileCardState, FileList, type FileListProps, type FileListStatus, Input, type InputProps, type InputState, KpiCard, type KpiCardProps, type KpiTrend, Legend, type LegendLineStyle, type LegendProps, type LegendVariant, ListBase, type ListBaseProps, type ListBaseSize, LoadingSpinner, type LoadingSpinnerProps, type LoadingSpinnerSize, type LoadingSpinnerVariant, Menu, MenuGroup, MenuItem, type MenuItemProps, type MenuItemState, type MenuType, NavSection, type NavSectionProps, NavigationButton, type NavigationButtonProps, SearchField, type SearchFieldProps, type SearchResult, SegmentedButton, type SegmentedButtonOption, type SegmentedButtonProps, Select, type SelectOption, type SelectProps, type SelectState, Separator, type SeparatorProps, SharePopover, type SharePopoverProps, type SharePopoverState, SidebarNavigation, type SidebarNavigationProps, Table, TableAction, type TableActionProps, TableHeader, type TableHeaderProps, type TableProps, TableRow, type TableRowData, type TableRowProps, type TableRowState, TextArea, type TextAreaProps, TextField, type TextFieldProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastProps, type ToastVariant, Tooltip, type TooltipPlacement, type TooltipProps, type TooltipSide, type TooltipVariant, cn };
+export { AccountSwitcher, type AccountSwitcherProps, Activity, type ActivityItem, type ActivityItemState, type ActivityProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BadgeVariant, Breadcrumb, type BreadcrumbItem, type BreadcrumbProps, Button, type ButtonProps, type ButtonState, Dialog, type DialogProps, type DialogVariant, Dropdown, type DropdownOption, type DropdownProps, type DropdownSize, EditorToolbar, type EditorToolbarIcons, type EditorToolbarProps, type EditorToolbarState, EmptyState, type EmptyStateActionVariant, type EmptyStateMedia, type EmptyStateProps, FileCard, type FileCardProps, type FileCardState, FileList, type FileListProps, type FileListStatus, Input, type InputProps, type InputState, KpiCard, type KpiCardProps, type KpiTrend, Legend, type LegendLineStyle, type LegendProps, type LegendVariant, ListBase, type ListBaseProps, type ListBaseSize, LoadingSpinner, type LoadingSpinnerProps, type LoadingSpinnerSize, type LoadingSpinnerVariant, Menu, MenuGroup, MenuItem, type MenuItemProps, type MenuItemState, type MenuType, NavSection, type NavSectionProps, NavigationButton, type NavigationButtonProps, SearchField, type SearchFieldProps, type SearchResult, SegmentedButton, type SegmentedButtonOption, type SegmentedButtonProps, Select, type SelectOption, type SelectProps, type SelectState, Separator, type SeparatorProps, SharePopover, type SharePopoverProps, type SharePopoverState, SidebarNavigation, type SidebarNavigationProps, Tab, type TabProps, Table, TableAction, type TableActionProps, TableHeader, type TableHeaderProps, type TableProps, TableRow, type TableRowData, type TableRowProps, type TableRowState, Tabs, type TabsProps, type TabsValue, TextArea, type TextAreaProps, TextField, type TextFieldProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastProps, type ToastVariant, Tooltip, type TooltipPlacement, type TooltipProps, type TooltipSide, type TooltipVariant, cn };

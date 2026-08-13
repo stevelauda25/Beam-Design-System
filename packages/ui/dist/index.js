@@ -1771,6 +1771,60 @@ function Activity({ items, lineAsset, className }) {
     ] }, `${item.person}-${item.time}-${index}`);
   }) });
 }
+
+// src/tabs/tabs.tsx
+import { jsx as jsx32, jsxs as jsxs29 } from "react/jsx-runtime";
+function Tab({ selected = false, icon, children, onClick, className }) {
+  return /* @__PURE__ */ jsxs29(
+    "button",
+    {
+      type: "button",
+      role: "tab",
+      "aria-selected": selected,
+      tabIndex: selected ? 0 : -1,
+      onClick,
+      className: cn(
+        "relative flex h-[22px] items-center justify-center gap-1.5 rounded-[4px] border-[0.5px] border-transparent px-2 py-0.5 font-normal text-[rgb(var(--color-gray-500))]",
+        selected && "border-black/10 bg-white text-[rgb(var(--color-gray-975))] shadow-[inset_0_0_0_0.2px_rgba(0,0,0,0.15),inset_0_0.5px_0.5px_rgba(255,255,255,0.6),inset_0_-0.5px_0.5px_rgba(0,0,0,0.5)]",
+        className
+      ),
+      children: [
+        /* @__PURE__ */ jsx32("span", { className: "flex size-3 shrink-0 [&>img]:size-3 [&>svg]:size-3", children: icon }),
+        /* @__PURE__ */ jsx32("span", { children })
+      ]
+    }
+  );
+}
+function Tabs({ value = "grid", onValueChange, listIcon, gridIcon, className }) {
+  const items = [
+    { value: "list", label: "List", icon: listIcon },
+    { value: "grid", label: "Grid", icon: gridIcon }
+  ];
+  return /* @__PURE__ */ jsx32(
+    "div",
+    {
+      role: "tablist",
+      "aria-label": "View",
+      className: cn(
+        "relative flex w-fit items-center overflow-hidden rounded-[6px] border-[0.5px] border-black/10 bg-[rgb(var(--color-gray-50))] p-0.5 font-sans text-xs font-normal leading-[18px] shadow-[inset_0_0.5px_0.5px_rgba(255,255,255,0.6)]",
+        className
+      ),
+      children: items.map((item) => {
+        const active = item.value === value;
+        return /* @__PURE__ */ jsx32(
+          Tab,
+          {
+            selected: active,
+            icon: item.icon,
+            onClick: () => onValueChange?.(item.value),
+            children: item.label
+          },
+          item.value
+        );
+      })
+    }
+  );
+}
 export {
   AccountSwitcher,
   Activity,
@@ -1800,10 +1854,12 @@ export {
   Separator,
   SharePopover,
   SidebarNavigation,
+  Tab,
   Table,
   TableAction,
   TableHeader,
   TableRow,
+  Tabs,
   TextArea,
   TextField,
   TextInput,

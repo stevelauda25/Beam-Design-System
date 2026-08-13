@@ -5,6 +5,7 @@
  */
 :root {
   --font-family-sans: "TikTok Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --color-gray-00: 255 255 255;
   --color-gray-50: 245 245 245;
   --color-gray-75: 240 240 240;

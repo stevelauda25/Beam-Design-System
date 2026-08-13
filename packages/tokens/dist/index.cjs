@@ -225,7 +225,8 @@ var preset = {
         "card": "var(--shadow-card)"
       },
       fontFamily: {
-        sans: ["TikTok Sans", "Inter", "system-ui", "-apple-system", "sans-serif"]
+        sans: ["TikTok Sans", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
       },
       fontSize: {
         "xs": ["12px", { lineHeight: "18px", letterSpacing: "0" }],
