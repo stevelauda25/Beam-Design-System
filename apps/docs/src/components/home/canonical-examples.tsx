@@ -1,26 +1,26 @@
 import { useState, type ComponentType } from 'react';
 import { Activity, Badge, Breadcrumb, Button, Dialog, Dropdown, EditorToolbar, FileCard, Menu, MenuItem, NavigationButton, Select, SharePopover, Table, TextInput, Toast, Tooltip } from '@beam/ui';
-import folderIcon from '../../../../../../Beam-App-Project/public/assets/folder.svg';
-import selectChevron from '../../../../../../Beam-App-Project/public/assets/api-chevron.svg';
-import selectedCheck from '../../../../../../Beam-App-Project/public/assets/download-success.svg';
-import moreIcon from '../../../../../../Beam-App-Project/public/assets/more.svg';
-import documentIcon from '../../../../../../Beam-App-Project/public/assets/file-document.svg';
-import closeIcon from '../../../../../../Beam-App-Project/public/assets/preview-close.svg';
-import editorChevron from '../../../../../../Beam-App-Project/public/assets/editor-chevron.svg';
-import editorBold from '../../../../../../Beam-App-Project/public/assets/editor-bold.svg';
-import editorItalic from '../../../../../../Beam-App-Project/public/assets/editor-italic.svg';
-import editorUnderline from '../../../../../../Beam-App-Project/public/assets/editor-underline.svg';
-import editorDivider from '../../../../../../Beam-App-Project/public/assets/editor-divider.svg';
-import editorList from '../../../../../../Beam-App-Project/public/assets/editor-list.svg';
-import editorLink from '../../../../../../Beam-App-Project/public/assets/editor-link.svg';
-import editorImage from '../../../../../../Beam-App-Project/public/assets/editor-image.svg';
-import sharePointer from '../../../../../../Beam-App-Project/public/assets/share-tooltip.svg';
-import shareDocument from '../../../../../../Beam-App-Project/public/assets/share-document.svg';
-import sharePeople from '../../../../../../Beam-App-Project/public/assets/share-people.svg';
-import shareChevron from '../../../../../../Beam-App-Project/public/assets/share-chevron.svg';
-import jamesAvatar from '../../../../../../Beam-App-Project/public/assets/james-avatar.png';
-import activityLine from '../../../../../../Beam-App-Project/public/assets/activity-line.svg';
-import toastSuccess from '../../../../../../Beam-App-Project/public/assets/toast-success.svg';
+import folderIcon from '../../assets/beam-app/folder.svg';
+import selectChevron from '../../assets/beam-app/api-chevron.svg';
+import selectedCheck from '../../assets/beam-app/download-success.svg';
+import moreIcon from '../../assets/beam-app/more.svg';
+import documentIcon from '../../assets/beam-app/file-document.svg';
+import closeIcon from '../../assets/beam-app/preview-close.svg';
+import editorChevron from '../../assets/beam-app/editor-chevron.svg';
+import editorBold from '../../assets/beam-app/editor-bold.svg';
+import editorItalic from '../../assets/beam-app/editor-italic.svg';
+import editorUnderline from '../../assets/beam-app/editor-underline.svg';
+import editorDivider from '../../assets/beam-app/editor-divider.svg';
+import editorList from '../../assets/beam-app/editor-list.svg';
+import editorLink from '../../assets/beam-app/editor-link.svg';
+import editorImage from '../../assets/beam-app/editor-image.svg';
+import sharePointer from '../../assets/beam-app/share-tooltip.svg';
+import shareDocument from '../../assets/beam-app/share-document.svg';
+import sharePeople from '../../assets/beam-app/share-people.svg';
+import shareChevron from '../../assets/beam-app/share-chevron.svg';
+import jamesAvatar from '../../assets/beam-app/james-avatar.png';
+import activityLine from '../../assets/beam-app/activity-line.svg';
+import toastSuccess from '../../assets/beam-app/toast-success.svg';
 
 export function BreadcrumbExample() {
   return (

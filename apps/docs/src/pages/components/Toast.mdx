@@ -1,8 +1,8 @@
 import { Toast } from '@beam/ui';
 import { PropsTable } from '../../components/docs/PropsTable';
-import successIcon from '../../../../../../Beam-App-Project/public/assets/toast-success.svg';
-import defaultIcon from '../../../../../../Beam-App-Project/public/assets/download-success.svg';
-import errorIcon from '../../../../../../Beam-App-Project/public/assets/preview-close.svg';
+import successIcon from '../../assets/beam-app/toast-success.svg';
+import defaultIcon from '../../assets/beam-app/download-success.svg';
+import errorIcon from '../../assets/beam-app/preview-close.svg';
 
 export const icon = (variant) => <img src={variant === 'success' ? successIcon : variant === 'error' ? errorIcon : defaultIcon} alt="" />;
 
