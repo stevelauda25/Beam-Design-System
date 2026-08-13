@@ -231,7 +231,7 @@ function PreviewNode({ node, onUpdate, onDelete, onDuplicate, onSelect, onMeasur
       >
         {/* Inner component wrapper — FIXED/FILL mode forces stretch.
             AUTO mode just contains the component at its intrinsic size.
-            `node.dark` flag scopes POD `.dark` CSS variables to this node.
+            `node.dark` flag scopes Beam `.dark` CSS variables to this node.
             We intentionally DON'T fill the wrapper with bg-canvas: the canvas
             stays light and only the rendered component (button, dropdown,
             etc.) picks up its own dark bg. Transparent variants like Button

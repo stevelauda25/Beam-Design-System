@@ -10,8 +10,8 @@ const TOC_PREFIXES = ['/components/', '/foundations/'];
 export function MdxLayout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const showToc = TOC_PREFIXES.some((p) => pathname.startsWith(p));
-  // Every component page documents a SPARC atom, so they all get the SPARC theme.
-  const isSparc = pathname.startsWith('/components/');
+  // Every component page documents a Beam component, so each receives the Beam theme.
+  const isBeamComponent = pathname.startsWith('/components/');
   const usesCompactSpecLayout = [
     '/components/button',
     '/components/text-input',
@@ -30,7 +30,7 @@ export function MdxLayout({ children }: { children: ReactNode }) {
   ].includes(pathname);
   const contentClass = cn(
     'mdx-content',
-    isSparc && 'sparc-theme',
+    isBeamComponent && 'beam-theme',
     usesCompactSpecLayout && 'compact-spec-page',
   );
 

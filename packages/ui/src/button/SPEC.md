@@ -1,7 +1,7 @@
-# Button — SPARC Phase-1 Atom Spec
+# Button — Beam Phase-1 Atom Spec
 
 > Sumber: Figma component set "Button" + implementasi `button.tsx`.
-> Status: collected, built, showcased in POD docs as `/components/sparc-button`.
+> Status: collected, built, showcased in Beam docs as `/components/beam-button`.
 
 ## 1. Purpose
 
@@ -74,8 +74,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 | Token purpose | Value | Note |
 |---|---|---|
-| Primary background | `#C0180C` | SPARC brand red |
-| Danger background | `#E51D31` | SPARC danger red |
+| Primary background | `#C0180C` | Beam brand red |
+| Danger background | `#E51D31` | Beam danger red |
 | Inverse background | `#26201C` | Warm dark |
 | Secondary/outline border | `border-white/10`, `border-[#8F8F8F]` |  |
 | Disabled primary bg | `#F9766C` |  |

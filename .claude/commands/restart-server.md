@@ -4,7 +4,7 @@ description: Kill dev servers (docs, centernode), clear caches, restart in backg
 
 # /restart-server
 
-Sat-set restart of POD repo dev servers. Common reason to run:
+Sat-set restart of Beam repo dev servers. Common reason to run:
 - Docs page didn't update after `/sync-figma`.
 - Centernode canvas doesn't reflect a fresh `tsup` rebuild.
 - Vite or Turbopack reports stale module / HMR confusion.

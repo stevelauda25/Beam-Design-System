@@ -1,15 +1,15 @@
-# CF Design System — Docs Site Design
+# Beam Design System — Docs Site Design
 
 **Status:** Draft · Awaiting implementation
 **Date:** 2026-04-27
-**Scope:** New `apps/docs` Vite app — public-facing documentation site for CF Design System
+**Scope:** New `apps/docs` Vite app — public-facing documentation site for Beam Design System
 **References:** [kumo-ui.com](https://kumo-ui.com/), [asto-design-system.vercel.app](https://asto-design-system.vercel.app/getting-started)
 
 ---
 
 ## Goal
 
-Ship a hybrid documentation site for CF Design System: kumo-style component grid on the home page + asto-style sidebar IA with Foundations as a first-class section. The site lives side-by-side with the existing `apps/playground` (which remains untouched as a dev scratchpad).
+Ship a hybrid documentation site for Beam Design System: kumo-style component grid on the home page + asto-style sidebar IA with Foundations as a first-class section. The site lives side-by-side with the existing `apps/playground` (which remains untouched as a dev scratchpad).
 
 **Why now:** The current state — 4 components and a single-page playground — has outgrown its review surface. A docs site gives designers, developers, and PMs a shared source of truth, makes the planned roadmap visible (via empty-state component pages), and gives the design system room to grow without rewriting the surface every sprint.
 
@@ -30,7 +30,7 @@ Ship a hybrid documentation site for CF Design System: kumo-style component grid
 ### Project structure
 
 ```
-pod-design-system/
+beam-design-system/
 ├── apps/
 │   ├── playground/        # unchanged — dev scratchpad
 │   └── docs/              # NEW
@@ -93,8 +93,8 @@ pod-design-system/
 - `vite` + `@vitejs/plugin-react`
 - `@mdx-js/rollup` + `remark-gfm` + `rehype-pretty-code` (Shiki-based syntax highlighting)
 - `react-router-dom@6` for routing
-- `tailwindcss` + Tailwind preset from `@pod/tokens` (shared with playground)
-- `@pod/ui` workspace dep — live demo components imported directly
+- `tailwindcss` + Tailwind preset from `@beam/tokens` (shared with playground)
+- `@beam/ui` workspace dep — live demo components imported directly
 - `lucide-react` for icons (consistent with playground)
 
 ### Single source of truth: `lib/routes.ts`
@@ -121,14 +121,14 @@ Adding a new component = add one entry. Sidebar order = array order. Status driv
 
 ### Theming
 
-Docs site is a *consumer* of `@pod/tokens`, not a redefiner.
+Docs site is a *consumer* of `@beam/tokens`, not a redefiner.
 
-- Tailwind config extends the preset from `@pod/tokens` (same as playground).
+- Tailwind config extends the preset from `@beam/tokens` (same as playground).
 - `darkMode: 'class'` — toggle `.dark` on `<html>`.
-- Default: respect `prefers-color-scheme`. User override persists in `localStorage('pod-docs-theme')`.
+- Default: respect `prefers-color-scheme`. User override persists in `localStorage('beam-docs-theme')`.
 - Anti-flash: inline blocking script in `index.html` reads localStorage + system preference and sets `.dark` *before* React mounts.
-- Toggle UI: sun/moon icon in topbar, uses `<Button variant="icon">` from `@pod/ui` (dogfooding).
-- Docs-specific CSS variables (sidebar bg, code block bg, MDX prose colors) live inline in `apps/docs/src/index.css` for V1. Promote to `@pod/tokens` only when a pattern is reused outside docs.
+- Toggle UI: sun/moon icon in topbar, uses `<Button variant="icon">` from `@beam/ui` (dogfooding).
+- Docs-specific CSS variables (sidebar bg, code block bg, MDX prose colors) live inline in `apps/docs/src/index.css` for V1. Promote to `@beam/tokens` only when a pattern is reused outside docs.
 
 ## Information Architecture
 
@@ -171,7 +171,7 @@ RESOURCES                ▾
 
 ### Topbar
 
-`[POD logo] Design System              v0.1.0          [☀/🌙]`
+`[Beam logo] Design System              v0.1.0          [☀/🌙]`
 
 Search box deferred to V2. Version label is hardcoded for V1.
 
@@ -206,7 +206,7 @@ PageHeader (title + tagline)
 ## Usage                    → MDX prose + code blocks
 ```
 
-Foundation pages are scaffolded from `@pod/tokens` content. Color reads token values directly rather than hardcoding hex.
+Foundation pages are scaffolded from `@beam/tokens` content. Color reads token values directly rather than hardcoding hex.
 
 ### Component page — Ready (e.g. `Button.mdx`)
 
@@ -292,10 +292,10 @@ export const mdxComponents = {
 - [ ] Dark mode toggle does not flash on reload.
 - [ ] All 4 ready components have a page with live preview + code block + props table + a11y notes.
 - [ ] All 8 planned components have a page rendering the shared empty state.
-- [ ] All 5 foundation pages exist with content scaffolded from `@pod/tokens`.
+- [ ] All 5 foundation pages exist with content scaffolded from `@beam/tokens`.
 - [ ] Sidebar groups (Foundations, Components, Resources) are collapsible.
 - [ ] Mobile: sidebar collapses to an off-canvas drawer below 768px.
-- [ ] No hex values in MDX content — all styling consumes `@pod/tokens` semantic tokens.
+- [ ] No hex values in MDX content — all styling consumes `@beam/tokens` semantic tokens.
 - [ ] Home grid tiles are clickable and route to the corresponding component page.
 - [ ] Sidebar uses `●` / `○` to distinguish ready vs planned.
 - [ ] `routes.ts` is the single source of truth for sidebar order, navigation, and home grid contents.
@@ -310,4 +310,4 @@ export const mdxComponents = {
 - **Live demo + code**: author writes both manually for V1.
 - **Props table**: manual markdown for V1.
 - **Code highlighting**: `rehype-pretty-code` (Shiki).
-- **Docs-specific styling**: inline in `apps/docs/src/index.css`, not promoted to `@pod/tokens` until reused outside docs.
+- **Docs-specific styling**: inline in `apps/docs/src/index.css`, not promoted to `@beam/tokens` until reused outside docs.

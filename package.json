@@ -1,14 +1,14 @@
 {
-  "name": "pod-design-system-test",
+  "name": "beam-design-system",
   "private": true,
   "version": "0.1.12",
-  "description": "Small design system test environment for POD — sprint-style scope.",
+  "description": "Design tokens, React components, and documentation for the Beam Design System.",
   "packageManager": "pnpm@9.7.0",
   "scripts": {
-    "dev": "pnpm -F docs dev",
+    "dev": "pnpm -F @beam/docs dev",
     "build": "pnpm build:docs",
     "build:packages": "pnpm -F @beam/tokens build && pnpm -F @beam/ui build",
-    "build:docs": "pnpm build:packages && mkdir -p apps/docs/public && echo '{\"drifted\":[],\"inSync\":[],\"errors\":[]}' > apps/docs/public/figma-status.json && echo '{\"components\":[]}' > apps/docs/public/figma-manifest.json && pnpm -F docs build",
+    "build:docs": "pnpm build:packages && mkdir -p apps/docs/public && echo '{\"drifted\":[],\"inSync\":[],\"errors\":[]}' > apps/docs/public/figma-status.json && echo '{\"components\":[]}' > apps/docs/public/figma-manifest.json && pnpm -F @beam/docs build",
     "build:centernode": "pnpm build:packages && cd centernode && npm install --no-fund --no-audit && npm run build",
     "build:client": "cd client-test && npm install --no-fund --no-audit && npm run build",
     "build:all": "pnpm build:docs && pnpm build:centernode && pnpm build:client",

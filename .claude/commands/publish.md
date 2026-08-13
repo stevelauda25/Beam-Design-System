@@ -149,7 +149,7 @@ the first if second fails). Report exact error, let user resolve.
 git add packages/tokens/package.json packages/ui/package.json package.json \
         centernode/package.json centernode/package-lock.json \
         client-test/package.json client-test/package-lock.json
-git commit -m "release: pod-test-{ui,tokens}@<new>"
+git commit -m "release: beam-{ui,tokens}@<new>"
 git tag v<new>
 ```
 

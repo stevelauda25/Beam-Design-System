@@ -4,7 +4,7 @@ description: Start dev servers (docs, centernode, client-test) — idempotent. I
 
 # /run
 
-Idempotent dev-server launcher for the POD workspace. Different from
+Idempotent dev-server launcher for the Beam workspace. Different from
 `/restart-server` — this one does NOT kill anything. If a server is already
 up, it just reports the URL.
 

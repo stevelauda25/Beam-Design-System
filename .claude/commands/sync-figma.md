@@ -54,7 +54,7 @@ If FIRST-SYNC → **FULL PATH is mandatory** (skip FAST PATH entirely). You MUST
 
 1. Pull `get_design_context` AND `get_screenshot`.
 2. Read the design_context output **line by line** and audit existing code against it. Every:
-   - `rounded-[Npx]` in design_context → map to the EXACT POD radius token
+   - `rounded-[Npx]` in design_context → map to the EXACT Beam radius token
      (`xxs=2, xs=4, sm=6, md=8, lg=10, xl=12, 2xl=16, 3xl=20, 4xl=24`).
      If you used `rounded-sm` when Figma says `rounded-[4px]` — that's `rounded-xs`. Fix it.
    - `bg-[var(--xxx)]` in design_context → trace to the right semantic token.
@@ -273,7 +273,7 @@ not just protecting hex values.
 
 1. Read the Figma variable name. Identify its semantic role (`primary` →
    accent namespace; `error` → danger namespace; `secondary` → neutral).
-2. Pick the POD token from the SAME namespace. Never reach across.
+2. Pick the Beam token from the SAME namespace. Never reach across.
 3. If the Figma hex doesn't match any accent-* / danger-* / etc value, that
    means it's a NEW color — go to `experiment-*` rule above.
 4. If you ever type `hover:bg-danger-*` while editing a `variant === 'primary'`

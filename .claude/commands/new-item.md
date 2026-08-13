@@ -39,7 +39,7 @@ Read `.figma/manifest.json`:
 
 - If `manifest.fileKey !== inputFileKey` → ABORT.
   Multi-file tracking not supported. Tell user to use the canonical file
-  (`TCd9exLXTUMciyw1VqnPSK` for POD).
+  (`TCd9exLXTUMciyw1VqnPSK` for Beam).
 
 - If user-provided slug already exists in `manifest.components[]` → ABORT.
   Tell user to use `/sync-figma <slug>` for refreshes.

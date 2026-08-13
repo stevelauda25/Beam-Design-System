@@ -1303,13 +1303,13 @@ in packages/tokens and packages/ui."
 ## Task 16: Verify centernode runtime (likely no-op)
 
 **Files:**
-- Read: `centernode/src/utils/cfRuntime.js`
+- Read: `centernode/src/utils/beamRuntime.js`
 
 - [ ] **Step 1: Check for old token references**
 
 Run:
 ```bash
-grep -nE 'experiment-|accent-|danger-|text-text-|border-border-|bg-raised|bg-text-primary|border-text-primary|ring-border-focus' centernode/src/utils/cfRuntime.js
+grep -nE 'experiment-|accent-|danger-|text-text-|border-border-|bg-raised|bg-text-primary|border-text-primary|ring-border-focus' centernode/src/utils/beamRuntime.js
 ```
 Expected: NO matches (verified during plan drafting — file is token-agnostic).
 

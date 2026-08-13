@@ -1,4 +1,4 @@
-# CF Design System — Sprint 1 Design
+# Beam Design System — Sprint 1 Design
 
 **Status:** Implemented · Sprint 1 scope
 **Components:** Button · Checkbox · SearchInput · Tooltip
@@ -9,12 +9,12 @@
 
 Understand how a design-system sprint (Outpace Labs style) works in practice by
 shipping **a minimum-viable token system and 4 components** — enough to seed a
-real POD design system without overcommitting to architecture.
+real Beam design system without overcommitting to architecture.
 
 ## Non-goals
 
 - Complete component library (Modal, Select, Table, etc.) — deferred.
-- Publishing to npm — `@pod/ui` and `@pod/tokens` are workspace-only.
+- Publishing to npm — `@beam/ui` and `@beam/tokens` are workspace-only.
 - Build pipeline for packages — they ship raw TS/CSS; the docs site compiles
   them through Vite. Adding a package build step is a sprint-2 concern.
 - Storybook — the MDX docs site is enough to review the full surface.
@@ -83,10 +83,10 @@ the variable values swap and everything cascades.
 
 ## Recommended next sprints
 
-1. **Tokens v2 (from Figma).** Pull real POD colors, type scale, radii,
+1. **Tokens v2 (from Figma).** Pull real Beam colors, type scale, radii,
    shadows from Figma into `primitives.ts` and `theme.css`. Zero component
    edits expected.
-2. **Typography primitives.** Add `<Text>` / `<Heading>` components so POD
+2. **Typography primitives.** Add `<Text>` / `<Heading>` components so Beam
    screens stop reaching for raw Tailwind classes for text sizing.
 3. **Form primitives.** `Label`, `Field`, `HelperText` shared across inputs —
    Checkbox and SearchInput currently inline label/error rendering; a single
@@ -99,5 +99,5 @@ the variable values swap and everything cascades.
    Dashboard dark UIs need extra contrast between `surface` and `raised`.
 7. **Component tests.** Currently none — the docs site acts as the visual check.
    Introduce Vitest + Testing Library when API stability matters.
-8. **Package build.** When we want to consume `@pod/ui` from the real POD repo
+8. **Package build.** When we want to consume `@beam/ui` from the real Beam repo
    without sharing `tsconfig.base.json`, add `tsup` or equivalent.

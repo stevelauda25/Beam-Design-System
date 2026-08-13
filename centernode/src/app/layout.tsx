@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-// POD design system — tokens (CSS variables) + compiled Tailwind utilities.
+// Beam design system — tokens (CSS variables) + compiled Tailwind utilities.
 // Order matters: theme.css first (declares --color-* etc.), then styles.css
 // (utility classes that consume those vars).
 import "@beam/tokens/theme.css";
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Inter matches POD docs font — POD components rendered in centernode inherit this.
+// Inter matches Beam docs font — Beam components rendered in centernode inherit this.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function RootLayout({
     <html
       lang="en"
       // Initial `dark` class activates @beam/tokens dark-mode variables
-      // across every POD primitive rendered inside centernode. The
+      // across every Beam primitive rendered inside centernode. The
       // bootstrap script below reads `centernode-theme` from localStorage
       // and removes the class if user previously toggled to light — runs
       // before React mounts so there's no flash-of-wrong-theme.

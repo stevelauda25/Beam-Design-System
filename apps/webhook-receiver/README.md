@@ -15,7 +15,7 @@ which runs the Claude Code Action sync.
 ### 1. Create a GitHub App
 
 1. Go to https://github.com/settings/apps/new
-2. **Name:** `pod-figma-sync-bot` (or similar)
+2. **Name:** `beam-figma-sync-bot` (or similar)
 3. **Homepage URL:** repo URL
 4. **Webhook:** uncheck "Active" (we don't receive GitHub events here)
 5. **Permissions** → Repository:
@@ -27,13 +27,13 @@ which runs the Claude Code Action sync.
 8. On the App settings page:
    - Note the **App ID** (top of page)
    - Generate a **private key** (PEM file downloads — keep safe)
-9. Click **Install App** (left sidebar) → install on `stevelauda25/pod-native-design-system` only
+9. Click **Install App** (left sidebar) → install on `stevelauda25/Beam-Design-System` only
 10. After install, the URL becomes `https://github.com/settings/installations/<INSTALLATION_ID>` — note the ID
 
 ### 2. Create the Vercel project
 
-1. Vercel dashboard → **Add New** → **Project** → import `stevelauda25/pod-native-design-system`
-2. **Project name:** `pod-figma-webhook-receiver` (must differ from docs site)
+1. Vercel dashboard → **Add New** → **Project** → import `stevelauda25/Beam-Design-System`
+2. **Project name:** `beam-figma-webhook-receiver` (must differ from docs site)
 3. **Root Directory:** `apps/webhook-receiver`
 4. Framework preset: **Other**
 5. Build/Output: leave defaults (vercel.json handles it)
@@ -55,7 +55,7 @@ curl -X POST https://api.figma.com/v2/webhooks \
     "team_id": "<TEAM_ID containing the design system file>",
     "endpoint": "https://<your-vercel-url>/api/figma-webhook",
     "passcode": "<same value as FIGMA_WEBHOOK_SECRET>",
-    "description": "CF Design System sync"
+    "description": "Beam Design System sync"
   }'
 ```
 

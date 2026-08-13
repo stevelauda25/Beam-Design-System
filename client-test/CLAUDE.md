@@ -6,14 +6,14 @@ This file is **mandatory reading** before generating or editing any code in this
 
 ## Project Identity
 
-This is `client-test` — a React + Vite + TypeScript application that consumes the **CF Design System** via two npm packages:
+This is `client-test` — a React + Vite + TypeScript application that consumes the **Beam Design System** via two npm packages:
 
 - **`@beam/ui`** — React components. Current shipped set: `Button`, `Checkbox`, `TextInput`, `SearchInput`, `Dropdown` (+ `DropdownMenu` / `DropdownItem` / `DropdownBadge`), `Tooltip`, `Switch` (experimental), **`Badge`** (added 0.1.8), **`Tab`** (added 0.1.8).
 - **`@beam/tokens`** — Design tokens (CSS variables + Tailwind preset). Source of truth for colors, radius, shadows, **spacing**, **font family**, **font size**, motion durations + easings, keyframes.
 
 These packages are the **single source of truth** for visual design AND interaction primitives. They are token-driven, dark-mode-aware, and accessibility-aware. Treat them as production primitives — never re-implement what they provide.
 
-> **Hard rule:** Every screen, page, or fragment generated in this project MUST be composed from `@beam/ui` components and `@beam/tokens` semantic classes. No native `<button>`, no hex codes, no ad-hoc styling, no third-party variants of primitives that POD already ships. If a primitive doesn't exist → see Rule 10.
+> **Hard rule:** Every screen, page, or fragment generated in this project MUST be composed from `@beam/ui` components and `@beam/tokens` semantic classes. No native `<button>`, no hex codes, no ad-hoc styling, no third-party variants of primitives that Beam already ships. If a primitive doesn't exist → see Rule 10.
 
 > **The list above can lag the actual installed version.** Before generating code, ALWAYS check `node_modules/@beam/ui/AGENTS.md` (ships in the tarball, auto-updates on `npm install`). That file is the ground truth — this CLAUDE.md is a project-level overview only.
 
@@ -60,7 +60,7 @@ stop. This applies to:
 <Dropdown placeholder="Pilih negara" />
 ```
 
-**Why:** This project is a public showcase for the POD design system. Demos
+**Why:** This project is a public showcase for the Beam design system. Demos
 and prototypes ship to investors, partners, and external developers — the
 locale audience is international. Bahasa Indonesia in component copy
 looks like accidental developer leakage.
@@ -87,7 +87,7 @@ availability + intent map + token list change between releases — old
 AGENTS.md = stale rules in your head.
 
 ```jsonc
-// ✅ package.json after every POD release
+// ✅ package.json after every Beam release
 "dependencies": {
   "@beam/tokens": "^0.1.8",
   "@beam/ui":     "^0.1.8"
@@ -106,7 +106,7 @@ AGENTS.md = stale rules in your head.
 **Forbidden:**
 - ❌ Pinning to an old version on purpose to "avoid breakage" — the design
   system uses semver. Patch / minor bumps are additive.
-- ❌ Falling back to a local copy of a primitive that POD now ships
+- ❌ Falling back to a local copy of a primitive that Beam now ships
   (e.g. you built a local `Badge` before 0.1.8 — delete it, use the npm one).
 - ❌ Generating UI without first re-reading `AGENTS.md` after a `npm install`.
 
@@ -139,7 +139,7 @@ import {
 <div className="rounded-md bg-zinc-800 px-2 text-xs">READY</div>  {/* should be <Badge> */}
 ```
 
-**Coverage map** (component → POD primitive):
+**Coverage map** (component → Beam primitive):
 
 | Asked for | Use this |
 |---|---|
@@ -158,7 +158,7 @@ import {
 | Native `<input type="text">` / `<input type="search">` | ❌ Never. Always `<TextInput>` / `<SearchInput>`. |
 | Native `<select>` | ❌ Never. Always `<Dropdown popup={...}>`. |
 
-If you find yourself writing `<button>`, `<input>`, `<select>`, or any styled `<div>` that *acts like* a primitive POD ships — STOP. Replace with the POD primitive. When in doubt, `cat node_modules/@beam/ui/AGENTS.md` to confirm what's shipped in the installed version.
+If you find yourself writing `<button>`, `<input>`, `<select>`, or any styled `<div>` that *acts like* a primitive Beam ships — STOP. Replace with the Beam primitive. When in doubt, `cat node_modules/@beam/ui/AGENTS.md` to confirm what's shipped in the installed version.
 
 ### Rule 2 — Always Use Semantic Tokens (color, radius, shadow, spacing, font, motion)
 
@@ -192,7 +192,7 @@ application code.
 - **Shadow (foundation drop scale):** `shadow-foundation-xs | sm | md | lg | xl | 2xl | 3xl`
 - **Shadow (brand glow):** `shadow-glow-accent-inset[-strong]`, `shadow-glow-danger-inset[-strong]`, `shadow-glow-accent-text`
 - **Spacing (padding / margin / gap):** Tailwind's stock scale — `0`, `0.5` (2px), `1` (4px), `1.5` (6px), `2` (8px), `2.5` (10px), `3` (12px), `4` (16px), `5` (20px), `6` (24px), `8` (32px), `10` (40px), `12` (48px), `16` (64px). **Never** use arbitrary `p-[Npx]` / `gap-[Npx]`. If the design calls for a value outside this scale, talk to the designer first.
-- **Font family:** Locked to **Inter** (loaded via `next/font` upstream and via stylesheet in docs). Don't import another font. POD's `text-*` size classes assume Inter metrics.
+- **Font family:** Locked to **Inter** (loaded via `next/font` upstream and via stylesheet in docs). Don't import another font. Beam's `text-*` size classes assume Inter metrics.
 - **Font size scale:** `text-xs` (12), `text-sm` (13 — dashboard default), `text-base` (14), `text-md` (15), `text-lg` (16), `text-xl` (18), `text-2xl` (20), `text-3xl` (24). Use these. Never `text-[15px]`.
 - **Font weight:** `font-normal`, `font-medium`, `font-semibold`, `font-bold` — same as Tailwind defaults.
 - **Motion:** `duration-fast | base | slow`, `ease-standard | emphasized | press`. Use `animate-menu-in` / `animate-menu-item-in` / `animate-fade-in` for entry; mirror their durations (220–280ms) for any custom exit motion.
@@ -321,7 +321,7 @@ Truly missing (as of 0.1.8): `Modal` / `Dialog`, `Combobox`, `DatePicker`,
 `Avatar`, `Pagination`.
 
 If you need a `Tabs` group — compose `<Tab>` atoms in a `role="tablist"`
-wrapper, parent owns active state (the `<Tab>` atom is what POD ships).
+wrapper, parent owns active state (the `<Tab>` atom is what Beam ships).
 Same for `Badge` lists — just multiple `<Badge>` instances; no "BadgeGroup"
 needed.
 
@@ -416,16 +416,16 @@ File itu di-ship dalam tarball npm. Setiap `npm update @beam/ui` di project ini,
 
 ## Agentation Feedback Flow
 
-This project has `agentation` (visual feedback overlay) wired into `App.tsx`. Owner non-dev klik element di browser → tulis intent → output disalin ke clipboard sudah ter-enrich dengan POD context lewat `src/lib/cf-agentation.ts`.
+This project has `agentation` (visual feedback overlay) wired into `App.tsx`. Owner non-dev klik element di browser → tulis intent → output disalin ke clipboard sudah ter-enrich dengan Beam context lewat `src/lib/beam-agentation.ts`.
 
 **Saat user paste output agentation ke kamu**, output-nya akan punya format:
 
 ```markdown
-# Agentation Feedback — POD-enriched
+# Agentation Feedback — Beam-enriched
 
-You are editing a project that uses **CF Design System** (...)
+You are editing a project that uses **Beam Design System** (...)
 **Hard rules** (zero exceptions — see `client-test/CLAUDE.md`):
-- Every UI change must use POD primitives + semantic tokens.
+- Every UI change must use Beam primitives + semantic tokens.
 - ...
 
 ---
@@ -433,7 +433,7 @@ You are editing a project that uses **CF Design System** (...)
 ### Annotation: Button
 **User intent:** ganti ke outline
 
-**POD context:** Target is `<Button>` from `@beam/ui` (a tracked primitive).
+**Beam context:** Target is `<Button>` from `@beam/ui` (a tracked primitive).
 → Edit MUST keep this as `<Button>`. Don't replace with native `<button>`/`<input>`.
 → Available props/variants: see `node_modules/@beam/ui/AGENTS.md`.
 
@@ -444,13 +444,13 @@ You are editing a project that uses **CF Design System** (...)
 **Cara handle:**
 
 1. Parse intent dari `**User intent:**` line — natural language seperti "ganti ke outline", "warna lebih lembut", "tambah icon kanan", dll.
-2. **Cek `POD context` line:**
-   - Kalau target POD primitive → translate intent ke prop change pada element existing. Don't rebuild from scratch.
-   - Kalau target local component → translate ke className/prop change pakai POD tokens (no hex).
+2. **Cek `Beam context` line:**
+   - Kalau target Beam primitive → translate intent ke prop change pada element existing. Don't rebuild from scratch.
+   - Kalau target local component → translate ke className/prop change pakai Beam tokens (no hex).
 3. **Cek `node_modules/@beam/ui/AGENTS.md`** untuk:
    - Daftar variant/size yang valid untuk component itu
    - Token names untuk styling adjustment
-4. **Gunakan intent map** di AGENTS.md untuk natural language → API call. Misal "ganti ke outline" → `variant="outline"` (POD pakai "outline", bukan "secondary").
+4. **Gunakan intent map** di AGENTS.md untuk natural language → API call. Misal "ganti ke outline" → `variant="outline"` (Beam pakai "outline", bukan "secondary").
 5. Locate file → pakai `Location` (DOM path) + `nearbyText` + `Current classes` untuk grep file source. Agentation tidak kasih file path eksplisit; kamu cari sendiri via grep di `src/`.
 6. Apply minimum edit. Don't refactor surrounding code unless intent mengharuskan.
 7. Report ke user: file yang di-edit + line, dan terjemahan intent → API change (misal "intent 'ganti ke outline' → `variant='outline'` di Button.tsx:42").
@@ -467,7 +467,7 @@ When reviewing existing code (yours or others') in this project, flag and fix an
 - ✗ Custom font family: `font-['Roboto']` — Inter is locked at the preset.
 - ✗ `dark:` modifiers anywhere
 - ✗ Native `<button>`, `<input type="checkbox">`, `<input type="text">`, `<input type="search">`, `<select>` for new UI — use `<Button>`, `<Checkbox>`, `<TextInput>`, `<SearchInput>`, `<Dropdown popup={…}>`
-- ✗ Building a "Badge" / "Tab" / "Filter chip" yourself — POD ships `<Badge>` and `<Tab>` as of 0.1.8
+- ✗ Building a "Badge" / "Tab" / "Filter chip" yourself — Beam ships `<Badge>` and `<Tab>` as of 0.1.8
 - ✗ Rendering `<DropdownMenu>` as a sibling with `absolute` positioning — use `<Dropdown popup={…}>` so the popover anchors below the trigger even with hint/error present
 - ✗ Tailwind v4 plugin (`@tailwindcss/postcss`) in `package.json`
 - ✗ `<Tooltip>` wrapping a non-focusable element
@@ -478,7 +478,7 @@ When reviewing existing code (yours or others') in this project, flag and fix an
 - ✗ Legacy shadow classes (`shadow-sm`, `shadow-md`, `shadow-lg`) — removed in 0.1.0, migrate to `shadow-foundation-*`
 - ✗ Inventing radius keys (`rounded-2.5xl`, `rounded-huge`) — only the documented scale is real
 - ✗ Touching `experiment-*` tokens for "production" UI — those are time-bounded experiments, not stable primitives
-- ✗ Instant DOM removal on user-triggered dismissal (filter chips, removable tags, toasts) — POD's removal-motion standard is 280ms blur+scale+width-collapse. See AGENTS.md "Motion" section for the recipe.
+- ✗ Instant DOM removal on user-triggered dismissal (filter chips, removable tags, toasts) — Beam's removal-motion standard is 280ms blur+scale+width-collapse. See AGENTS.md "Motion" section for the recipe.
 - ✗ Stale `package.json` — running against an older `@beam/ui` than what's on npm. Run `npm view @beam/ui version`; if installed < latest, bump first.
 
 ---

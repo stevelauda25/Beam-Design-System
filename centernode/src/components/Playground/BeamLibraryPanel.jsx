@@ -30,7 +30,7 @@ function ButtonGroupPreview({ quantity = 3, ...rest }) {
   );
 }
 
-const POD_PREVIEW = {
+const BEAM_PREVIEW = {
   Button: PodButton,
   Checkbox: PodCheckbox,
   TextInput: PodTextInput,
@@ -102,7 +102,7 @@ function decorateForPreview(name, props) {
 }
 
 function MiniPreview({ name, props }) {
-  const Comp = POD_PREVIEW[name];
+  const Comp = BEAM_PREVIEW[name];
   if (!Comp) return null;
   const hint = PREVIEW_HINTS[name] || { scale: 1 };
   const decorated = decorateForPreview(name, props);
@@ -238,7 +238,7 @@ function VariantCard({ name, label, props, onPick, title, darkPreview }) {
           {label}
         </div>
       )}
-      {/* Scoped POD theme: when darkPreview, `.dark` class makes children of POD use dark-mode tokens. */}
+      {/* Scoped Beam theme: when darkPreview, `.dark` class makes children of Beam use dark-mode tokens. */}
       <div className={`${darkPreview ? "dark" : ""} px-3 py-4 min-h-[64px] flex items-center justify-center`} style={{ background: darkPreview ? "var(--cn-canvas)" : undefined }}>
         <MiniPreview name={name} props={props} />
       </div>
@@ -336,7 +336,7 @@ function ComponentRow({ component, onPick, defaultOpen = false, darkPreview = fa
   );
 }
 
-export default function CfLibraryPanel({
+export default function BeamLibraryPanel({
   manifest,
   onAddPodNode,
   // Layers tab inputs — when these are wired the sidebar shows a Layers tab
@@ -451,7 +451,7 @@ export default function CfLibraryPanel({
               />
             ))}
             {count === 0 && (
-              <div className="p-4 cn-caption">No POD components available.</div>
+              <div className="p-4 cn-caption">No Beam components available.</div>
             )}
           </>
         )}

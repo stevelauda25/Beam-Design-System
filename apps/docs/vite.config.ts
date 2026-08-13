@@ -9,7 +9,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const sparcUiRoot = resolve(__dirname, '../../packages/ui/src');
+const beamUiRoot = resolve(__dirname, '../../packages/ui/src');
 
 /**
  * The docs source uses TypeScript-style explicit `.js` extensions on relative
@@ -60,7 +60,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@sparc-ui': sparcUiRoot,
+      '@beam/ui': beamUiRoot,
     },
   },
   server: {

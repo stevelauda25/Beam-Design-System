@@ -9,7 +9,7 @@ import {
   groupMeta,
 } from '../../lib/routes.js';
 
-const STORAGE_KEY = 'pod-docs-sidebar-groups';
+const STORAGE_KEY = 'beam-docs-sidebar-groups';
 
 function readGroupState(): Record<string, boolean> {
   if (typeof window === 'undefined') return {};

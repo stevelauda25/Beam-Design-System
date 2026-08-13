@@ -1,4 +1,4 @@
-# CF Design System — Progress
+# Beam Design System — Progress
 
 Snapshot per **2026-05-12**. Updated manually; not auto-synced.
 
@@ -10,7 +10,7 @@ against current code/registry before acting on stale claims.
 
 ## Stack identity
 
-- **Source of truth:** Figma file `TCd9exLXTUMciyw1VqnPSK` (CF Design System 1.1)
+- **Source of truth:** Figma file `TCd9exLXTUMciyw1VqnPSK` (Beam Design System 1.1)
 - **Code packages:** `@beam/tokens` + `@beam/ui` (published to npm, owner `hixelation`)
 - **Consumer test:** `client-test/` (React + Vite + TS, consumes via npm)
 - **Drift-detection state:** `.figma/` (manifest, snapshots, state, variables)
@@ -71,12 +71,12 @@ update needed per release.
 
 | File | Purpose |
 |---|---|
-| `CLAUDE.md` | Hard rule PAKEM — every UI must use POD primitives + tokens. Coverage map, removed-shadow notes, AGENTS.md pointer for live truth |
+| `CLAUDE.md` | Hard rule PAKEM — every UI must use Beam primitives + tokens. Coverage map, removed-shadow notes, AGENTS.md pointer for live truth |
 | `CLIENT-PROMPT.md` | Setup guide (Tailwind v3, PostCSS, theme order, common pitfalls) |
 | `COMPONENT-RECIPES.md` | 10 ready-to-paste patterns (header, toolbar, settings, confirmation, etc.) |
 | `src/components/AddIncomeForm.tsx` | Proof-of-concept Indonesian finance form |
 | `src/components/form/{Field,TextInput,Select}.tsx` | Local primitives (Rule 10 — missing in @beam/ui yet) |
-| `src/lib/cf-agentation.ts` | Enriches `agentation` annotation output with POD context |
+| `src/lib/beam-agentation.ts` | Enriches `agentation` annotation output with Beam context |
 
 ### `.figma/` — drift state
 
@@ -121,7 +121,7 @@ node_modules/.bin/tsup
 
 ## 3. Memory entries (cross-session)
 
-Located at `~/.claude/projects/-Users-helmiismail-Documents-Component-pod-native-design-system/memory/`.
+Located at `~/.claude/projects/-Users-helmiismail-Documents-Component-Beam-Design-System/memory/`.
 
 - `user_language.md` — User communicates in Indonesian; reply in same.
 - `feedback_npm_publish_otp.md` — Account `hixelation` uses WebAuthn (security key "hixel"), not TOTP. Recovery codes (64-char hex) consumed single-use even on failed attempts. Track consumed codes; suggest regen at `npmjs.com/settings/hixelation/account-info` (not `/tokens` — that's for access tokens).
@@ -159,21 +159,21 @@ Inspired by today's findings. Sorted by impact-to-effort ratio.
 ### High impact, low effort (≤ 1 day each)
 - **P1)** Add **dist-vs-source verify** to `/publish` spec — grep critical class names in dist after rebuild, fail pre-publish if divergent.
 - **P2)** Convert `AGENTS.md` to **`agents.json`** structured manifest. Smaller token count for Claude context, programmatic-queryable.
-- **P3)** Wire **Renovate** in `client-test/` — auto-PR on every POD release.
+- **P3)** Wire **Renovate** in `client-test/` — auto-PR on every Beam release.
 - **P4)** **CI auto-drift-check on PR** — GitHub Action runs `check.mjs --json`, posts comment table.
 - **P5)** Public **AGENTS.md viewable** — symlink to `apps/docs/public/AGENTS.md` for external consumer reference URL.
 
 ### High impact, medium effort (2–4 days each)
 - **P6)** **Component Playground** — interactive prop editor at `/playground` (already on this week's timeline).
 - **P7)** **Visual regression** — Chromatic or Percy snapshot per PR. Would have caught today's "maroon hover" bug.
-- **P8)** **MCP server for POD** — expose tokens + components as MCP resources. Claude in consumer projects queries via MCP instead of reading AGENTS.md. Huge token-efficiency win.
+- **P8)** **MCP server for Beam** — expose tokens + components as MCP resources. Claude in consumer projects queries via MCP instead of reading AGENTS.md. Huge token-efficiency win.
 - **P9)** **NDJSON streaming** for `/api/figma-check` — render cards as each Figma fetch returns. Worth doing at 30+ components.
 
 ### Long-term (week+ effort)
 - **P10)** **Figma webhook handler** — real-time invalidation. Deferred until > 50 components tracked. Use Vercel Edge Functions + Vercel KV (Hobby tier sufficient up to 10× growth).
 - **P11)** **Figma plugin** — select component in Figma → run `/sync-figma` from plugin. Inverse: select code → highlight Figma node.
-- **P12)** **POD review bot** — Claude reads PR diff in client-test, comments POD rule violations before human review.
-- **P13)** **Browser extension @-completion** — universal POD autocomplete in any textarea (Agentation, Claude.ai, Cursor, etc.).
+- **P12)** **Beam review bot** — Claude reads PR diff in client-test, comments Beam rule violations before human review.
+- **P13)** **Browser extension @-completion** — universal Beam autocomplete in any textarea (Agentation, Claude.ai, Cursor, etc.).
 
 ### Client-test as testbed (ongoing)
 - **P14)** Add 2-3 more forms: `AddExpenseForm`, `BudgetCard`, `TransactionList` — identify primitive gaps.
@@ -211,7 +211,7 @@ Inspired by today's findings. Sorted by impact-to-effort ratio.
 ## 8. Pending design decision — @-mention autocomplete in Agentation
 
 User asked (2026-05-12): can we have `@button` autocomplete in Agentation
-comment textarea that suggests component variants from the POD package?
+comment textarea that suggests component variants from the Beam package?
 
 Goal: seamless live design flow.
 

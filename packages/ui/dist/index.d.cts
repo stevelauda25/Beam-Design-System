@@ -1,123 +1,59 @@
 import * as react from 'react';
-import { ButtonHTMLAttributes, ReactNode, InputHTMLAttributes, TextareaHTMLAttributes, HTMLAttributes, ReactElement, ComponentType, SVGProps, MouseEventHandler, CSSProperties, ComponentPropsWithoutRef } from 'react';
+import { ButtonHTMLAttributes, ReactNode, HTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes, ReactElement } from 'react';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import { VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-declare const buttonVariants: (props?: ({
-    variant?: "primary" | "default" | "danger" | "destructive" | "secondary" | "outline" | "ghost" | "inverse" | null | undefined;
-    size?: "default" | "xs" | "sm" | "md" | "lg" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-    /** leading icon (auto-sized: xs=14, sm=16, md=20, lg=24) */
+type ButtonState = 'default' | 'hover' | 'pressed' | 'disabled';
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     leftIcon?: ReactNode;
-    /** trailing icon (auto-sized: xs=12, sm=16, md=20, lg=24) */
-    rightIcon?: ReactNode;
-    /** show a loading state (adopts disabled styling) and disable the button */
+    /** Forces a state for design-system comparison. Normal usage can omit it. */
+    visualState?: ButtonState;
+    /** Kept for compatibility; Beam-App-Project uses one visual button type. */
+    variant?: string;
+    /** Kept for compatibility; Beam-App-Project uses one 26px size. */
+    size?: string;
     loading?: boolean;
-    className?: string;
 }
 /**
- * button — the base button atom.
- *
- * Built from the Figma "Button" component set. It supports
- * six visual types (primary, danger, secondary, outline, ghost, inverse) and
- * four sizes (lg, md, sm, xs). All states are driven by Tailwind pseudo
- * classes: hover, active (pressed) and disabled. The loading state adopts
- * the disabled styling (loading implies the disabled attribute).
+ * Beam-App-Project button.
+ * Extracted from `.plainButton` / `.createApiKey`: 26px high, 4px × 8px
+ * padding, 6px gap, 12px icon, 12px/18px TikTok Sans, and 4px radius.
  */
 declare const Button: react.ForwardRefExoticComponent<ButtonProps & react.RefAttributes<HTMLButtonElement>>;
 
-/**
- * badge — a small status/role label.
- *
- * Colour recipe from the Figma: fill {color}-25, border {color}-200,
- * text + dot {color}-500 (Success mapped exactly onto the green scale, so the
- * same recipe drives error/warning). Neutral and outline are grayscale.
- */
-declare const badge: (props?: ({
-    variant?: "default" | "destructive" | "outline" | "success" | "error" | "warning" | "neutral" | "purple" | null | undefined;
-    size?: "sm" | "md" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface BadgeProps extends VariantProps<typeof badge> {
+type BadgeVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'error' | 'info' | 'purple';
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
     children: ReactNode;
-    /** colored status dot before the label (takes the text color) */
+    variant?: BadgeVariant;
+    /** Compatibility props retained while the catalog uses one structure. */
+    size?: 'sm' | 'md';
     dot?: boolean;
-    /** optional leading icon */
     icon?: ReactNode;
-    className?: string;
 }
-declare function Badge({ variant, size, dot, icon, children, className }: BadgeProps): react.JSX.Element;
+/** One Beam badge structure; only its semantic color variant changes. */
+declare function Badge({ variant, size: _size, dot, icon, children, className, ...props }: BadgeProps): react.JSX.Element;
 
-type CheckboxSize = "small" | "medium" | "large";
-interface CheckboxProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-    /** on (checked) vs off (unchecked) */
-    checked?: boolean;
-    /** box size: small 12, medium 16, large 20 */
-    size?: CheckboxSize;
-    /** fires with the next checked value when toggled */
-    onCheckedChange?: (checked: boolean) => void;
-}
-/**
- * checkbox — the on/off control (Figma component-set "checkbox", node 2169:5148).
- *
- * Three states across three sizes (small / medium / large):
- *   off     #b8b8b8 hairline, white fill
- *   hover   border darkens to #000000 (CSS :hover)
- *   on      #2b2b2b fill, white check (matches the date picker's selected fill)
- *
- * Disabled dims to 50%. Built as a role="checkbox" button so it keyboard-toggles
- * (Space / Enter) and merges className.
- */
-declare function Checkbox({ checked, size, disabled, className, onCheckedChange, onClick, ...props }: CheckboxProps): react.JSX.Element;
-
-interface SwitchProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-    size?: "sm" | "md";
-    state?: "default" | "hover";
-    checked?: boolean;
-    defaultChecked?: boolean;
-    onCheckedChange?: (checked: boolean) => void;
-}
-declare function Switch({ size, state, checked, defaultChecked, disabled, onCheckedChange, className, ...props }: SwitchProps): react.JSX.Element;
-
-type TagVariant = "default" | "add" | "removable" | "selected" | "placeholder";
-interface TagProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: TagVariant;
-    children: ReactNode;
-}
-declare function Tag({ variant, children, className, ...props }: TagProps): react.JSX.Element;
-
-interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
-    /** md = 12px padding / 14px text (regular), sm = 8px padding all sides / 12px text (small) */
-    size?: "sm" | "md";
-    /** error styling (red border) */
-    error?: boolean;
-    /** leading icon inside the field (18px) */
+type InputState = 'default' | 'focused' | 'filled' | 'disabled' | 'error';
+interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
     leading?: ReactNode;
-    /** trailing icon inside the field (18px) */
     trailing?: ReactNode;
-    /** flush left addon with a divider (e.g. a label dropdown) */
-    prefix?: ReactNode;
-    /** flush right addon with a divider */
-    suffix?: ReactNode;
+    visualState?: InputState;
     containerClassName?: string;
-    /** override the padding on the input area (e.g. a tighter sidebar field) */
+    /** Compatibility aliases retained for existing consumers. */
+    error?: boolean;
+    size?: 'sm' | 'md';
+    prefix?: ReactNode;
+    suffix?: ReactNode;
     fieldClassName?: string;
 }
 /**
- * text-input — the raw input field.
- *
- * From Figma: fill gray-50 (#F5F5F5), 0.5px black/10 border, 6px radius. Focus
- * (via focus-within) turns the border black and adds a 3px black/10 ring;
- * error uses the red-500 border; disabled uses gray-100 fill with #8F8F8F
- * text. 14px text, #525252 placeholder. Cool grays are arbitrary values for
- * now, to be reconciled with the rest of the neutrals.
- *
- * NOTE: colors match the Figma exactly; the search-field composes this.
+ * The complete Beam-App-Project input, extracted from `.searchButton`.
+ * It keeps the real 26px geometry, leading icon, value/placeholder and
+ * trailing shortcut/action in one reusable structure.
  */
+declare function TextInput({ leading, trailing, visualState, error, disabled, containerClassName, className, value, defaultValue, placeholder, size: _size, prefix: _prefix, suffix: _suffix, fieldClassName: _fieldClassName, ...props }: TextInputProps): react.JSX.Element;
 type InputProps = TextInputProps;
-declare function TextInput({ size, error, disabled, leading, trailing, prefix, suffix, containerClassName, fieldClassName, className, ...props }: TextInputProps): react.JSX.Element;
-/** Alias matching the file name used by the app. */
 declare const Input: typeof TextInput;
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -146,7 +82,7 @@ declare const TextArea: react.ForwardRefExoticComponent<TextareaProps & react.Re
 type ListBaseSize = "sm" | "md";
 declare const listBase: (props?: ({
     size?: "sm" | "md" | null | undefined;
-    state?: "default" | "disabled" | "hover" | "selected" | null | undefined;
+    state?: "default" | "hover" | "disabled" | "selected" | null | undefined;
     tone?: "default" | "danger" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface ListBaseProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof listBase> {
@@ -187,38 +123,22 @@ interface LoadingSpinnerProps {
 }
 declare function LoadingSpinner({ size, variant, label, className, }: LoadingSpinnerProps): react.JSX.Element;
 
-type SliderVariant = "default" | "range" | "no-value";
-interface SliderProps {
-    variant?: SliderVariant;
-    min?: number;
-    max?: number;
-    value?: number;
-    defaultValue?: number;
-    valueEnd?: number;
-    defaultValueEnd?: number;
-    showValue?: boolean;
-    onValueChange?: (value: number) => void;
-    onRangeChange?: (range: [number, number]) => void;
-    label?: string;
-    className?: string;
-}
-declare function Slider({ variant, min, max, value, defaultValue, valueEnd, defaultValueEnd, showValue, onValueChange, onRangeChange, label, className, }: SliderProps): react.JSX.Element;
-
-type TooltipPlacement = "top" | "right" | "bottom" | "left";
-/** @deprecated Use TooltipPlacement. */
+type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 type TooltipSide = TooltipPlacement;
+type TooltipVariant = 'default' | 'success' | 'error';
 interface TooltipProps {
     children: ReactElement;
-    body: ReactNode;
+    body?: ReactNode;
+    content?: ReactNode;
     title?: ReactNode;
     placement?: TooltipPlacement;
-    /** @deprecated Use placement. */
     side?: TooltipSide;
+    variant?: TooltipVariant;
     open?: boolean;
     defaultOpen?: boolean;
     className?: string;
 }
-declare function Tooltip({ children, body, title, placement, side, open, defaultOpen, className, }: TooltipProps): react.JSX.Element;
+declare function Tooltip({ children, body, content, title, placement, side, variant, open, defaultOpen, className }: TooltipProps): react.JSX.Element;
 
 interface AvatarProps {
     /** image url; when omitted, the initials fallback is shown */
@@ -266,58 +186,36 @@ interface SegmentedButtonProps {
  */
 declare function SegmentedButton({ options, value, onChange, size, fill, dividers, className, }: SegmentedButtonProps): react.JSX.Element;
 
-type RadioSize = "sm" | "md" | "lg";
-interface RadioProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-    size?: RadioSize;
-    checked?: boolean;
-    onCheckedChange?: (checked: boolean) => void;
-}
-/**
- * radio — a single-select control.
- *
- * Figma spec:
- *   sm: 12px outer, 8px inner dot (2px ring)
- *   md: 16px outer, 8px inner dot (4px ring)
- *   lg: 20px outer, 12px inner dot (4px ring)
- * Unchecked: 1px #B8B8B8 border, transparent background.
- * Hover/selected unchecked: border #201B18.
- * Checked: border #201B18, inner dot #201B18.
- */
-declare function Radio({ size, checked, disabled, className, onCheckedChange, onClick, ...props }: RadioProps): react.JSX.Element;
-
-/** Any icon component that accepts `size` plus standard SVG props. */
-type IconComponent = ComponentType<{
-    size?: number;
-} & SVGProps<SVGSVGElement>>;
-interface NavItemProps {
-    /** Icon for the row. Omit on sub-list rows. */
-    icon?: IconComponent;
-    /** the row label */
-    label: string;
-    /** current page — the selected treatment */
-    current?: boolean;
-    /** show a chevron and mark the row expandable */
-    expandable?: boolean;
-    /** chevron points down when expanded, right when collapsed */
-    expanded?: boolean;
-    /** sub-list row: indented, no leading icon */
-    sub?: boolean;
-    /** destructive tone (e.g. Log out) */
-    danger?: boolean;
-    disabled?: boolean;
-    onClick?: MouseEventHandler<HTMLDivElement>;
-    className?: string;
-}
-declare function NavItem({ icon: Icon, label, current, expandable, expanded, sub, danger, disabled, onClick, className, }: NavItemProps): react.JSX.Element;
-
 interface NavSectionProps {
     /** section caption, rendered uppercase. Omit for an unlabeled group. */
     label?: string;
     /** the nav-items belonging to this section */
     children?: ReactNode;
     className?: string;
+    /** optional divider treatment used by application sidebar groups */
+    divided?: boolean;
 }
-declare function NavSection({ label, children, className }: NavSectionProps): react.JSX.Element;
+declare function NavSection({ label, children, className, divided }: NavSectionProps): react.JSX.Element;
+
+interface NavigationButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    label: string;
+    leading?: ReactNode;
+    trailing?: ReactNode;
+    active?: boolean;
+    collapsed?: boolean;
+}
+/** Atom: the compact interactive row used throughout Beam application navigation. */
+declare const NavigationButton: react.ForwardRefExoticComponent<NavigationButtonProps & react.RefAttributes<HTMLButtonElement>>;
+
+interface SidebarNavigationProps extends HTMLAttributes<HTMLElement> {
+    collapsed?: boolean;
+    header?: ReactNode;
+    actions?: ReactNode;
+    footer?: ReactNode;
+    children?: ReactNode;
+}
+/** Organism: application sidebar shell composed from navigation atoms and molecules. */
+declare function SidebarNavigation({ collapsed, header, actions, footer, children, className, ...props }: SidebarNavigationProps): react.JSX.Element;
 
 interface SearchResult {
     id: string;
@@ -411,103 +309,19 @@ interface LegendProps {
 }
 declare function Legend({ variant, color, label, value, percent, dashed, lineStyle, bordered, className, }: LegendProps): react.JSX.Element;
 
-declare const CHART_TOOLTIP_SHADOW = "0px 4px 8px 0px rgba(0,0,0,0.1),0px 2px 8px 0px rgba(0,0,0,0.15),0px 1px 2px 0px rgba(0,0,0,0.25),inset 0px 0px 0px 1px rgba(0,0,0,0.1),inset 0px -1px 1px 0px rgba(0,0,0,0.1),inset 0px 1px 2px 0px rgba(255,255,255,0.25)";
-interface ChartTooltipItem {
-    label: ReactNode;
-    value?: ReactNode;
-    color?: string;
-    markerClassName?: string;
-}
-interface ChartTooltipProps {
-    title: ReactNode;
-    items: ChartTooltipItem[];
-    children?: ReactNode;
-    className?: string;
-    style?: CSSProperties;
-}
-declare function ChartTooltip({ title, items, children, className, style }: ChartTooltipProps): react.JSX.Element;
-
-type ProgressBarVariant = "default" | "labeled" | "indeterminate";
-type ProgressBarSize = "small" | "medium" | "large";
-interface ProgressBarProps extends Omit<ComponentPropsWithoutRef<"div">, "children"> {
-    value?: number;
-    max?: number;
-    variant?: ProgressBarVariant;
-    size?: ProgressBarSize;
-    label?: string;
-    color?: string;
-    valueFormatter?: (value: number, max: number) => ReactNode;
-    trackClassName?: string;
-    fillClassName?: string;
-    labelRowClassName?: string;
-    labelClassName?: string;
-    valueClassName?: string;
-}
-declare function ProgressBar({ value, max, variant, size, label, color, valueFormatter, className, trackClassName, fillClassName, labelRowClassName, labelClassName, valueClassName, ...props }: ProgressBarProps): react.JSX.Element;
-
-type ProgressBarBaseSize = "sm" | "md" | "lg";
-interface ProgressBarBaseProps extends Omit<ComponentPropsWithoutRef<"div">, "children"> {
-    percent: number;
-    size?: ProgressBarBaseSize;
-    color?: string;
-    indeterminate?: boolean;
-    trackClassName?: string;
-    fillClassName?: string;
-}
-declare function ProgressBarBase({ percent, size, color, indeterminate, className, trackClassName, fillClassName, ...props }: ProgressBarBaseProps): react.JSX.Element;
-
-interface ProgressValueBarProps {
-    label: string;
-    valueLabel: string;
-    percent: number;
-    color: string;
-    className?: string;
-    fillTextClassName?: string;
-    trackTextClassName?: string;
-    valueClassName?: string;
-}
-declare function ProgressValueBar({ label, valueLabel, percent, color, className, fillTextClassName, trackTextClassName, valueClassName, }: ProgressValueBarProps): react.JSX.Element;
-
-/**
- * toast — dismissible status notification.
- *
- * Figma recipe: white surface, radius 12, padding 12, horizontal flex with
- * 16px gaps, three stacked drop shadows plus a white inset top highlight.
- * The four tones are identical except for the title, description and status
- * icon colors. The component sizes to its content; the 427px Figma frame is
- * treated as the maximum width, not a fixed width.
- */
-declare const toastTitle: (props?: ({
-    variant?: "default" | "success" | "error" | "warning" | "neutral" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-type ToastVariant = NonNullable<VariantProps<typeof toastTitle>["variant"]>;
-/** The four canonical tones; `"default"` is accepted as an alias of `"neutral"`. */
-type ToastTone = "neutral" | "error" | "success" | "warning";
+type ToastVariant = 'neutral' | 'default' | 'success' | 'error' | 'warning';
 interface ToastProps {
-    /** tone of the notification; `"default"` is kept as an alias of `"neutral"` */
     variant?: ToastVariant;
-    /** show the 16px loading-spinner slot (default true, matching the Figma frame) */
-    loading?: boolean;
     title?: string;
     description?: string;
     actionLabel?: string;
     onAction?: () => void;
     onDismiss?: () => void;
-    /** override the leading status-icon slot */
     icon?: ReactNode;
+    loading?: boolean;
     className?: string;
 }
-declare function Toast({ variant, loading, title, description, actionLabel, onAction, onDismiss, icon, className, }: ToastProps): react.JSX.Element;
-
-type DropZoneVisualState = "default" | "active" | "dragging";
-interface DropZoneProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
-    state?: DropZoneVisualState;
-    description?: string;
-    maxSizeLabel?: string;
-    onFiles?: (files: File[]) => void;
-    className?: string;
-}
-declare function DropZone({ state, maxSizeLabel, description, disabled, multiple, accept, onFiles, className, ...inputProps }: DropZoneProps): react.JSX.Element;
+declare function Toast({ variant, title, description, actionLabel, onAction, onDismiss, icon, className }: ToastProps): react.JSX.Element;
 
 type FileListStatus = "ready" | "uploading" | "uploaded" | "error";
 interface FileListProps {
@@ -520,24 +334,6 @@ interface FileListProps {
     className?: string;
 }
 declare function FileList({ status, name, size, progress, onRemove, onRetry, className, }: FileListProps): react.JSX.Element;
-
-type ProgressRingSize = "sm" | "md" | "lg";
-interface ProgressRingProps {
-    value?: number;
-    size?: ProgressRingSize;
-    showPercent?: boolean;
-    label?: string;
-    className?: string;
-}
-declare function ProgressRing({ value, size, showPercent, label, className, }: ProgressRingProps): react.JSX.Element;
-
-interface SkillLevelProps {
-    level?: 1 | 2 | 3 | 4 | 5;
-    max?: number;
-    className?: string;
-    label?: string;
-}
-declare function SkillLevel({ level, max, className, label }: SkillLevelProps): react.JSX.Element;
 
 type EmptyStateMedia = "icon" | "avatar" | "none";
 type EmptyStateActionVariant = "primary" | "secondary";
@@ -562,13 +358,6 @@ interface EmptyStateProps {
     className?: string;
 }
 declare function EmptyState({ media, icon, avatarSrc, avatarAlt, title, description, actionLabel, actionIcon, actionVariant, onAction, className, }: EmptyStateProps): react.JSX.Element;
-
-type GanttBarState = "default" | "hover" | "focus" | "disabled";
-interface GanttBarProps extends HTMLAttributes<HTMLDivElement> {
-    state?: GanttBarState;
-    children?: ReactNode;
-}
-declare function GanttBar({ state, children, className, ...props }: GanttBarProps): react.JSX.Element;
 
 interface TextFieldBaseProps {
     /** label text shown above the field (14px / 500) */
@@ -605,49 +394,6 @@ type TextFieldProps = TextFieldBaseProps & (({
  * red-500 to match the existing TextInput/Textarea error border.
  */
 declare function TextField(props: TextFieldProps): react.JSX.Element;
-
-/**
- * timeline — a step/track indicator with a connecting line and step dots.
- *
- * Figma recipe: a 16px cross-axis frame (197px tall vertical / 199px wide
- * horizontal) holding four ~10px green-500 filled circles distributed along
- * the frame's length and joined by a green-500 connecting line (in Figma the
- * line plus circles are a single 'Union' vector); each circle carries a small
- * white check glyph centered on top. The line renders first (behind); the
- * dots lay directly over it with no surrounding box or padding.
- *
- * Implementation: a full-length ~1.5px neutral-200 track plus a green-500
- * progress overlay reaching the last completed/current step. Steps are spaced
- * with justify-between, so step i's center sits at i/(n-1) of the track and
- * the overlay is sized with that percentage (n=1 renders no overlay).
- * Completed dots are green-500 (the same value as the success token, matching
- * badge/file-list); current is a white dot with a green-500 ring and center
- * dot; upcoming is a quiet neutral dot.
- *
- * Note: the neutral track/dot use arbitrary values (rgb(226 220 212) /
- * rgb(207 199 188), i.e. neutral-200/300) because the tailwind preset's
- * backgroundColor.neutral semantic key shadows the neutral ramp — the
- * bg-neutral-<shade> utilities never generate.
- */
-declare const timeline: (props?: ({
-    orientation?: "horizontal" | "vertical" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-type TimelineOrientation = "vertical" | "horizontal";
-type TimelineStepStatus = "completed" | "current" | "upcoming";
-interface TimelineStep {
-    /** Step state. Defaults to "completed" (the Figma depicts all-completed tracks). */
-    status?: TimelineStepStatus;
-    /** Accessible name for the step; also shown as a tooltip. */
-    label?: string;
-}
-interface TimelineProps extends Omit<ComponentPropsWithoutRef<"div">, "children">, VariantProps<typeof timeline> {
-    /** Number of steps, or an array of per-step descriptors. Defaults to 4 (per the Figma). */
-    steps?: number | TimelineStep[];
-    /** Accessible label for the whole track. */
-    label?: string;
-    className?: string;
-}
-declare function Timeline({ orientation, steps, label, className, ...props }: TimelineProps): react.JSX.Element;
 
 type DropdownSize = "sm" | "md";
 interface DropdownOption {
@@ -726,158 +472,147 @@ interface DropdownProps {
  */
 declare function Dropdown({ size, options, value, defaultValue, onChange, placeholder, leading, error, disabled, open, filterable, className, "aria-label": ariaLabel, }: DropdownProps): react.JSX.Element;
 
-interface ComboboxChromeProps {
-    /** label text shown above the field (14px / 500) */
-    label: ReactNode;
-    /** shows a red asterisk after the label; otherwise an "(Optional)" caption */
-    required?: boolean;
-    /** tooltip content — when present a trailing info icon (14px) appears in the label row */
-    info?: ReactNode;
-    /** hint text below the field (turns red when error) */
-    hint?: ReactNode;
-    /** error styling — red field border + red hint */
-    error?: boolean;
-    /** base id for the label/hint ids (auto-generated when omitted) */
-    id?: string;
-    /** className for the outer wrapper (the field column) */
-    className?: string;
+type SelectState = 'default' | 'hover' | 'focused' | 'open' | 'selected' | 'disabled';
+interface SelectOption {
+    value: string;
+    label: string;
 }
-type ComboboxProps = ComboboxChromeProps & Omit<DropdownProps, "error" | "className">;
-/**
- * combobox — the complete select-style form field: label row + dropdown + hint
- * row.
- *
- * Composes the existing Dropdown; every Dropdown prop (size, options,
- * value/defaultValue/onChange, placeholder, leading, disabled, open,
- * aria-label) passes straight through, so size="sm" renders the sm field AND
- * the sm list rows, and error renders Dropdown's red field border.
- *
- * The chrome mirrors text-field exactly: column flex with 8px gaps; label row
- * is a 2px-gap row (14px/500 label, red asterisk when required, "(Optional)"
- * #8F8F8F otherwise, trailing 14px info icon when the field has tooltip
- * content); hint row is a 4px-gap row (12px info icon + 12px hint, #000000
- * default / red on error).
- *
- * Accessibility: Dropdown's trigger is a button and (unlike TextInput) accepts
- * no id, so the text-field htmlFor pattern cannot target it. Instead the
- * wrapper is a role="group" labelled by the visible label and described by the
- * hint, and — when the label is a plain string — it is also passed to Dropdown
- * as aria-label so the trigger button itself gets the label as its accessible
- * name (an explicit aria-label prop always wins).
- */
-declare function Combobox({ label, required, info, hint, error, id, className, ...dropdownProps }: ComboboxProps): react.JSX.Element;
+interface SelectProps {
+    options: SelectOption[];
+    placeholder?: string;
+    value?: string;
+    onChange?: (value: string) => void;
+    visualState?: SelectState;
+    chevron: ReactNode;
+    selectedIndicator?: ReactNode;
+    className?: string;
+    'aria-label'?: string;
+}
+/** Beam-App-Project select trigger and listbox, extracted from `.apiSelect`. */
+declare function Select({ options, placeholder, value, onChange, visualState, chevron, selectedIndicator, className, 'aria-label': ariaLabel }: SelectProps): react.JSX.Element;
 
-/**
- * pagination — page navigation, rows-per-page selector, summary text, and
- * their full-width composition. From Figma node 96:2316.
- *
- * All text is 12px/16px regular. Colours: #000000 primary, #525252 secondary,
- * #F5F5F5 hover fill, rgba(0,0,0,0.1) hairlines, 6px radius — the same
- * hardcoded neutral recipe the newest components (dropdown / list-base) use,
- * pending reconciliation into gray-* tokens.
- *
- * Decisions documented in SPEC.md:
- * - the boxed (bordered) number page is the CURRENT page state; hover is the
- *   #F5F5F5 fill (the isolated Figma cells were ambiguous).
- * - number pages use secondary #525252 text, switching to primary #000000 on
- *   the current page (mirrors the rows-per-page option rows).
- * - the selected rows-per-page option does NOT get the Figma's leading
- *   users-01 icon — that is a placeholder artefact; selected = #000000 text +
- *   trailing 12px check.
- */
-declare const pageButton: (props?: ({
-    state?: "default" | "current" | "hover" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface PaginationPageButtonProps extends VariantProps<typeof pageButton> {
-    /** the 1-based page number shown in the button */
-    page: number;
-    onClick?: (page: number) => void;
-    className?: string;
+type MenuItemState = 'default' | 'hover' | 'pressed' | 'selected' | 'disabled';
+interface MenuItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    icon: ReactNode;
+    indicator?: ReactNode;
+    visualState?: MenuItemState;
 }
-declare function PaginationPageButton({ page, state, onClick, className }: PaginationPageButtonProps): react.JSX.Element;
-declare const ELLIPSIS: "\u2026";
-type PageItem = number | typeof ELLIPSIS;
-/**
- * Ellipsis rule (siblingCount = s, edgeSize = 2s+1):
- * - pageCount <= edgeSize*2 + 1 → every page, no ellipsis.
- * - near an edge (current within the edge block) →
- *   `1 … edgeSize … N-edgeSize+1 … N`, e.g. the Figma `1 2 3 … 21 22 23`
- *   with s=1, page=1, pageCount=23. The edge block grows to keep the current
- *   page and its siblings visible.
- * - mid-range → `1 … page-s … page+s … N`.
- */
-declare function getPaginationItems(page: number, pageCount: number, siblingCount?: number): PageItem[];
-interface PaginationProps {
-    /** controlled 1-based current page */
-    page: number;
-    /** total number of pages (>= 1) */
-    pageCount: number;
-    /** called with the requested 1-based page */
-    onPageChange?: (page: number) => void;
-    /** pages shown on each side of the current page; also sets the edge block
-     *  size (2*siblingCount+1) and the ellipsis jump distance (default 1) */
-    siblingCount?: number;
-    previousLabel?: string;
-    nextLabel?: string;
+declare function MenuItem({ icon, indicator, visualState, disabled, children, className, ...props }: MenuItemProps): react.JSX.Element;
+type MenuType = 'single' | 'group';
+declare function Menu({ children, type, className }: {
+    children: ReactNode;
+    type?: MenuType;
     className?: string;
-    "aria-label"?: string;
-}
-declare function Pagination({ page, pageCount, onPageChange, siblingCount, previousLabel, nextLabel, className, "aria-label": ariaLabel, }: PaginationProps): react.JSX.Element;
-interface PaginationRowsPerPageProps {
-    /** controlled selected rows-per-page value */
-    value: number;
-    /** selectable values (default [10, 25, 50, 100]) */
-    options?: number[];
-    /** called with the chosen value */
-    onChange?: (value: number) => void;
-    /** leading label text (default "Rows per page") */
+}): react.JSX.Element;
+declare function MenuGroup({ children, label }: {
+    children: ReactNode;
     label?: string;
-    disabled?: boolean;
-    /** force the panel open (e.g. for docs); overrides the internal open state */
-    open?: boolean;
-    className?: string;
-    "aria-label"?: string;
+}): react.JSX.Element;
+
+type TableRowState = 'default' | 'hover' | 'selected' | 'disabled';
+interface TableRowData {
+    name: string;
+    size: string;
+    modified: string;
 }
-/**
- * rows-per-page — label + 64x28 select-style trigger whose panel opens
- * UPWARD. Panel + rows follow the Figma spec (143px panel, 8px-padding rows,
- * hairline separators, trailing 12px check on the selected row) on the repo's
- * popover recipe (white, 0.5px black/10 hairline, 6px radius, the shared
- * popover shadow). Interaction mirrors Dropdown: click toggles, outside
- * pointer-down and Escape close, ArrowUp/ArrowDown move the active option,
- * Enter/Space selects.
- */
-declare function PaginationRowsPerPage({ value, options, onChange, label, disabled, open, className, "aria-label": ariaLabel, }: PaginationRowsPerPageProps): react.JSX.Element;
-interface PaginationSummaryProps {
-    /** controlled 1-based current page */
-    page: number;
-    /** rows per page */
-    pageSize: number;
-    /** total number of rows */
-    total: number;
+interface TableProps {
+    rows: Array<TableRowData & {
+        state?: TableRowState;
+    }>;
+    actionIcon: ReactNode;
+    onAction?: (row: TableRowData) => void;
     className?: string;
 }
-declare function PaginationSummary({ page, pageSize, total, className }: PaginationSummaryProps): react.JSX.Element;
-interface PaginationFullProps extends Omit<PaginationProps, "className"> {
-    /** rows-per-page value (rows per page selector) */
-    pageSize: number;
-    /** called with the chosen rows-per-page value */
-    onPageSizeChange?: (value: number) => void;
-    /** rows-per-page options (default [10, 25, 50, 100]) */
-    pageSizeOptions?: number[];
-    /** total number of rows (summary text) */
-    total: number;
-    /**
-     * summary-start = Figma arrangement A (left: summary + "•" + rows-per-page,
-     * right: pagination). summary-end = arrangement B (left: rows-per-page,
-     * right: pagination + summary). Default "summary-start".
-     */
-    layout?: "summary-start" | "summary-end";
-    rowsPerPageLabel?: string;
+interface TableHeaderProps {
+    labels?: [string, string, string];
     className?: string;
 }
-declare function PaginationFull({ layout, page, pageCount, onPageChange, siblingCount, previousLabel, nextLabel, "aria-label": ariaLabel, pageSize, onPageSizeChange, pageSizeOptions, total, rowsPerPageLabel, className, }: PaginationFullProps): react.JSX.Element;
+declare function TableHeader({ labels, className }: TableHeaderProps): react.JSX.Element;
+interface TableRowProps extends TableRowData {
+    state?: TableRowState;
+    actionIcon?: ReactNode;
+    onAction?: () => void;
+    last?: boolean;
+    standalone?: boolean;
+    className?: string;
+}
+declare function TableRow({ name, size, modified, state, actionIcon, onAction, last, standalone, className }: TableRowProps): react.JSX.Element;
+/** The complete Beam file/API table composition. */
+declare function Table({ rows, actionIcon, onAction, className }: TableProps): react.JSX.Element;
+interface TableActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    icon: ReactNode;
+}
+declare function TableAction({ icon, className, ...props }: TableActionProps): react.JSX.Element;
+
+type FileCardState = 'default' | 'hover' | 'pressed' | 'selected' | 'disabled';
+interface FileCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    preview: ReactNode;
+    name?: string;
+    visualState?: FileCardState;
+}
+/** Beam-App-Project grid file card, extracted from `.fileGridCard`. */
+declare function FileCard({ preview, name, visualState, disabled, className, ...props }: FileCardProps): react.JSX.Element;
+
+type DialogVariant = 'standard' | 'confirmation';
+interface DialogProps {
+    variant?: DialogVariant;
+    title: string;
+    closeIcon: ReactNode;
+    primaryIcon?: ReactNode;
+    primaryLabel: string;
+    secondaryLabel?: string;
+    children: ReactNode;
+    className?: string;
+}
+declare function Dialog({ variant, title, closeIcon, primaryIcon, primaryLabel, secondaryLabel, children, className }: DialogProps): react.JSX.Element;
+
+type SharePopoverState = 'closed' | 'open' | 'hovered' | 'selected';
+interface SharePopoverProps {
+    state?: SharePopoverState;
+    pointer: ReactNode;
+    documentIcon: ReactNode;
+    peopleIcon: ReactNode;
+    avatar: ReactNode;
+    footerIcon: ReactNode;
+    fileName?: string;
+    className?: string;
+}
+declare function SharePopover({ state, pointer, documentIcon, peopleIcon, avatar, footerIcon, fileName, className }: SharePopoverProps): react.JSX.Element;
+
+type EditorToolbarState = 'default' | 'hover' | 'pressed' | 'selected' | 'menu-open';
+interface EditorToolbarIcons {
+    chevron: ReactNode;
+    bold: ReactNode;
+    italic: ReactNode;
+    underline: ReactNode;
+    divider: ReactNode;
+    list: ReactNode;
+    link: ReactNode;
+    image: ReactNode;
+    check: ReactNode;
+}
+interface EditorToolbarProps {
+    icons: EditorToolbarIcons;
+    state?: EditorToolbarState;
+    className?: string;
+}
+declare function EditorToolbar({ icons, state, className }: EditorToolbarProps): react.JSX.Element;
+
+type ActivityItemState = 'default' | 'current' | 'completed';
+interface ActivityItem {
+    person: string;
+    action: string;
+    time: string;
+    detail: string;
+    state?: ActivityItemState;
+}
+interface ActivityProps {
+    items: ActivityItem[];
+    lineAsset?: ReactNode;
+    className?: string;
+}
+declare function Activity({ items, lineAsset, className }: ActivityProps): react.JSX.Element;
 
 declare function cn(...inputs: ClassValue[]): string;
 
-export { AccountSwitcher, type AccountSwitcherProps, Avatar, type AvatarProps, Badge, type BadgeProps, Breadcrumb, type BreadcrumbItem, type BreadcrumbProps, Button, type ButtonProps, CHART_TOOLTIP_SHADOW, ChartTooltip, type ChartTooltipItem, type ChartTooltipProps, Checkbox, type CheckboxProps, Combobox, type ComboboxProps, DropZone, type DropZoneProps, type DropZoneVisualState, Dropdown, type DropdownOption, type DropdownProps, type DropdownSize, EmptyState, type EmptyStateActionVariant, type EmptyStateMedia, type EmptyStateProps, FileList, type FileListProps, type FileListStatus, GanttBar, type GanttBarProps, type GanttBarState, type IconComponent, Input, type InputProps, KpiCard, type KpiCardProps, type KpiTrend, Legend, type LegendLineStyle, type LegendProps, type LegendVariant, ListBase, type ListBaseProps, type ListBaseSize, LoadingSpinner, type LoadingSpinnerProps, type LoadingSpinnerSize, type LoadingSpinnerVariant, NavItem, type NavItemProps, NavSection, type NavSectionProps, Pagination, PaginationFull, type PaginationFullProps, PaginationPageButton, type PaginationPageButtonProps, type PaginationProps, PaginationRowsPerPage, type PaginationRowsPerPageProps, PaginationSummary, type PaginationSummaryProps, ProgressBar, ProgressBarBase, type ProgressBarBaseProps, type ProgressBarBaseSize, type ProgressBarProps, type ProgressBarSize, type ProgressBarVariant, ProgressRing, type ProgressRingProps, type ProgressRingSize, ProgressValueBar, type ProgressValueBarProps, Radio, type RadioProps, type RadioSize, SearchField, type SearchFieldProps, type SearchResult, SegmentedButton, type SegmentedButtonOption, type SegmentedButtonProps, Separator, type SeparatorProps, SkillLevel, type SkillLevelProps, Slider, type SliderProps, type SliderVariant, Switch, type SwitchProps, Tag, type TagProps, type TagVariant, TextArea, type TextAreaProps, TextField, type TextFieldProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Timeline, type TimelineOrientation, type TimelineProps, type TimelineStep, type TimelineStepStatus, Toast, type ToastProps, type ToastTone, type ToastVariant, Tooltip, type TooltipProps, type TooltipSide, buttonVariants, cn, getPaginationItems };
+export { AccountSwitcher, type AccountSwitcherProps, Activity, type ActivityItem, type ActivityItemState, type ActivityProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BadgeVariant, Breadcrumb, type BreadcrumbItem, type BreadcrumbProps, Button, type ButtonProps, type ButtonState, Dialog, type DialogProps, type DialogVariant, Dropdown, type DropdownOption, type DropdownProps, type DropdownSize, EditorToolbar, type EditorToolbarIcons, type EditorToolbarProps, type EditorToolbarState, EmptyState, type EmptyStateActionVariant, type EmptyStateMedia, type EmptyStateProps, FileCard, type FileCardProps, type FileCardState, FileList, type FileListProps, type FileListStatus, Input, type InputProps, type InputState, KpiCard, type KpiCardProps, type KpiTrend, Legend, type LegendLineStyle, type LegendProps, type LegendVariant, ListBase, type ListBaseProps, type ListBaseSize, LoadingSpinner, type LoadingSpinnerProps, type LoadingSpinnerSize, type LoadingSpinnerVariant, Menu, MenuGroup, MenuItem, type MenuItemProps, type MenuItemState, type MenuType, NavSection, type NavSectionProps, NavigationButton, type NavigationButtonProps, SearchField, type SearchFieldProps, type SearchResult, SegmentedButton, type SegmentedButtonOption, type SegmentedButtonProps, Select, type SelectOption, type SelectProps, type SelectState, Separator, type SeparatorProps, SharePopover, type SharePopoverProps, type SharePopoverState, SidebarNavigation, type SidebarNavigationProps, Table, TableAction, type TableActionProps, TableHeader, type TableHeaderProps, type TableProps, TableRow, type TableRowData, type TableRowProps, type TableRowState, TextArea, type TextAreaProps, TextField, type TextFieldProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastProps, type ToastVariant, Tooltip, type TooltipPlacement, type TooltipProps, type TooltipSide, type TooltipVariant, cn };

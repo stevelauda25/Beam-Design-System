@@ -18,7 +18,7 @@ Move from manual `/sync-figma <url>` (developer-driven) to an automated pipeline
 
 ### Service-template note
 
-This design also serves as the reference architecture for offering "AI-native design system" as a service to clients. The reusable IP is: the `/sync-figma` slash command, the diff/snapshot scripts, the GitHub workflow, and the webhook receiver. Per-client variation is limited to: the manifest contents, the secrets, and the Vercel project. Architecture should stay generic — no POD-specific assumptions baked in beyond the existing token vocabulary.
+This design also serves as the reference architecture for offering "AI-native design system" as a service to clients. The reusable IP is: the `/sync-figma` slash command, the diff/snapshot scripts, the GitHub workflow, and the webhook receiver. Per-client variation is limited to: the manifest contents, the secrets, and the Vercel project. Architecture should stay generic — no Beam-specific assumptions baked in beyond the existing token vocabulary.
 
 ### Non-goals
 
@@ -188,7 +188,7 @@ This design also serves as the reference architecture for offering "AI-native de
 **Env vars:**
 - `FIGMA_WEBHOOK_SECRET` — for HMAC verification
 - `GITHUB_APP_PRIVATE_KEY` + `GITHUB_APP_ID` + `GITHUB_INSTALLATION_ID` — for dispatching as the GitHub App
-- `GITHUB_REPO` — `stevelauda25/pod-native-design-system`
+- `GITHUB_REPO` — `stevelauda25/Beam-Design-System`
 
 ### 4.4 Diff script — `scripts/figma/diff-manifest.ts`
 
@@ -542,7 +542,7 @@ Per-client variation (the work each engagement requires):
 - Secrets (their Anthropic, Figma PAT, GitHub App)
 - Vercel projects (their accounts)
 
-The architecture is generic. The slash command is the only piece that has POD-specific assumptions baked in (semantic token names, file layout) — for client work, this needs to be parameterized per client codebase OR rewritten to be project-aware via reading `.claude/commands/sync-figma.md` from the target repo.
+The architecture is generic. The slash command is the only piece that has Beam-specific assumptions baked in (semantic token names, file layout) — for client work, this needs to be parameterized per client codebase OR rewritten to be project-aware via reading `.claude/commands/sync-figma.md` from the target repo.
 
 ---
 

@@ -16,7 +16,7 @@ export const routes: RouteEntry[] = [
   { path: '/',                 label: 'Home',            category: 'top', load: () => import('../pages/Home.js') },
   { path: '/getting-started',  label: 'Getting Started', category: 'top', load: () => import('../pages/GettingStarted.mdx') },
 
-  // Foundations — tokens collected from the SPARC apps on 2026-07-21
+  // Foundations — tokens collected from the Beam apps on 2026-07-21
   { path: '/foundations/typography', label: 'Typography', category: 'foundation', load: () => import('../pages/foundations/Typography.mdx') },
   { path: '/foundations/color',      label: 'Color',      category: 'foundation', load: () => import('../pages/foundations/Color.mdx') },
   { path: '/foundations/spacing',    label: 'Spacing',    category: 'foundation', load: () => import('../pages/foundations/Spacing.mdx') },
@@ -24,11 +24,11 @@ export const routes: RouteEntry[] = [
   { path: '/foundations/elevation',  label: 'Elevation',  category: 'foundation', load: () => import('../pages/foundations/Elevation.mdx') },
 
   // Visible components — intentionally limited to the current Beam catalog.
-  { path: '/components/button',             label: 'Button',             category: 'component', status: 'ready', description: 'Button atom.',             load: () => import('../pages/components/SparcButton.mdx') },
-  { path: '/components/text-input',         label: 'Input',              category: 'component', status: 'ready', description: 'Input atom.',            load: () => import('../pages/components/SparcInput.mdx') },
+  { path: '/components/button',             label: 'Button',             category: 'component', status: 'ready', description: 'Button atom.',             load: () => import('../pages/components/BeamButton.mdx') },
+  { path: '/components/text-input',         label: 'Input',              category: 'component', status: 'ready', description: 'Input atom.',            load: () => import('../pages/components/BeamInput.mdx') },
   { path: '/components/select',             label: 'Select',             category: 'component', status: 'ready', description: 'Select control.',         load: () => import('../pages/components/Select.mdx') },
   { path: '/components/menu',               label: 'Menu',               category: 'component', status: 'ready', description: 'Action menu.',            load: () => import('../pages/components/Menu.mdx') },
-  { path: '/components/badge',              label: 'Badge',              category: 'component', status: 'ready', description: 'Semantic badge.',        load: () => import('../pages/components/SparcBadge.mdx') },
+  { path: '/components/badge',              label: 'Badge',              category: 'component', status: 'ready', description: 'Semantic badge.',        load: () => import('../pages/components/BeamBadge.mdx') },
   { path: '/components/table',              label: 'Table',              category: 'component', status: 'ready', description: 'Data table.',            load: () => import('../pages/components/Table.mdx') },
   { path: '/components/file-card',          label: 'File Card',          category: 'component', status: 'ready', description: 'Grid file card.',         load: () => import('../pages/components/FileCard.mdx') },
   { path: '/components/dialog',             label: 'Dialog',             category: 'component', status: 'ready', description: 'Dialog structure.',       load: () => import('../pages/components/Dialog.mdx') },

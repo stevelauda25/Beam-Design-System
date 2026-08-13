@@ -30,7 +30,7 @@ export function AppHeader() {
     <header className="sticky top-0 z-40 border-b border-border-default bg-canvas/80 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4">
         <a href="/" className="text-lg font-semibold text-text-primary">
-          POD
+          Beam
         </a>
 
         <div className="mx-auto w-full max-w-[480px]">

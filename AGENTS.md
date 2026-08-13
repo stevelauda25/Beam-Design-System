@@ -1,11 +1,11 @@
-# AGENTS.md — CF Design System
+# AGENTS.md — Beam Design System
 
 Project context for AI agents working in this repo.
 
 ## Project identity
 
 Token-driven, dark-mode-aware React design system. Source of truth =
-**Figma file `TCd9exLXTUMciyw1VqnPSK`** (CF Design System 1.1). The codebase
+**Figma file `TCd9exLXTUMciyw1VqnPSK`** (Beam Design System 1.1). The codebase
 is a projection of Figma; drift detection at [scripts/figma/](scripts/figma/)
 keeps them honest.
 
@@ -51,7 +51,7 @@ Figma changed → identify EXACT scope (which variant + which property)
               → done
 ```
 
-**SACRED TOKENS — NEVER MODIFY.** These define POD's brand identity. Touching
+**SACRED TOKENS — NEVER MODIFY.** These define Beam's brand identity. Touching
 them = production breakage:
 
 ```
@@ -244,7 +244,7 @@ Use pre-registered MDX globals (`PageHeader`, `PreviewCard`, `PropsTable`,
    ```
 Then `node scripts/canvas/sync.mjs` (or `npm run build` in packages/ui).
 The script auto-updates: `tsup.config.ts` entries, `package.json` exports,
-`src/canvas.ts` aggregator, `centernode/src/utils/cfRuntime.js`. Centernode
+`src/canvas.ts` aggregator, `centernode/src/utils/beamRuntime.js`. Centernode
 sidebar picks it up automatically. No manual file edits needed.
 
 > **Important — centernode consumes @beam/ui via npm, NOT file: link.**
@@ -261,8 +261,8 @@ Directory). One `git push origin main` → all auto-rebuild in parallel.
 
 | App | Vercel project | Root Directory | Local dev source |
 |---|---|---|---|
-| `apps/docs` | `pod-docs.vercel.app` | `apps/docs` | pnpm workspace (file resolution, instant) |
-| `centernode` | `pod-centernode` (TBD URL) | `centernode` | npm version `@beam/ui@^x.y.z` (needs republish to update) |
+| `apps/docs` | `beam-docs.vercel.app` | `apps/docs` | pnpm workspace (file resolution, instant) |
+| `centernode` | `beam-centernode` (TBD URL) | `centernode` | npm version `@beam/ui@^x.y.z` (needs republish to update) |
 | `client-test` | not deployed (local-only) | `client-test` | npm version (same caveat as centernode) |
 
 Each app has its own `vercel.json` with build commands. Don't override

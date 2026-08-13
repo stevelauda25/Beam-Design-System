@@ -1,10 +1,10 @@
-import tokens from '../../data/sparc-foundation.json';
+import tokens from '../../data/beam-foundation.json';
 import { PreviewCard } from '../docs/PreviewCard.js';
 import { PropsTable } from '../docs/PropsTable.js';
 
 /**
- * Renderers for the SPARC foundation tokens (src/data/sparc-foundation.json),
- * collected from the SPARC apps on 2026-07-21 and this repo's token source.
+ * Renderers for the Beam foundation tokens (src/data/beam-foundation.json),
+ * collected from the Beam apps on 2026-07-21 and this repo's token source.
  * Every preview here uses inline styles with the raw collected values rather
  * than Tailwind token classes.
  */
@@ -12,7 +12,7 @@ import { PropsTable } from '../docs/PropsTable.js';
 type RampName = 'neutral' | 'accent-gray-aqua' | 'success' | 'warning' | 'error' | 'info' | 'gray' | 'alpha-black' | 'alpha-white';
 
 /** One color ramp (e.g. neutral-25 → neutral-950) as a swatch grid. */
-export function SparcColorRamp({ ramp }: { ramp: RampName }) {
+export function BeamColorRamp({ ramp }: { ramp: RampName }) {
   const shades = tokens.color[ramp];
   return (
     <div className="my-0 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -36,7 +36,7 @@ export function SparcColorRamp({ ramp }: { ramp: RampName }) {
 }
 
 /** Semantic color tokens, rendered as a labeled swatch list. */
-export function SparcSemanticColors() {
+export function BeamSemanticColors() {
   return (
     <div className="my-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {Object.entries(tokens.color.semantic).map(([name, value]) => (
@@ -67,7 +67,7 @@ export function SparcSemanticColors() {
 const RADIUS_ORDER = ['none', '2xs', 'xs', 'sm', 'md', '10', 'lg', 'xl', 'full'] as const;
 
 /** Radius scale as rows: chip + value + accent sample box (36px, pill for `full`). */
-export function SparcRadiusGrid() {
+export function BeamRadiusGrid() {
   return (
     <div className="my-6 flex flex-col divide-y divide-black/10 rounded border border-black/10 bg-surface">
       {RADIUS_ORDER.map((name) => {
@@ -94,7 +94,7 @@ export function SparcRadiusGrid() {
 }
 
 /** Shadow tokens rendered on cards inside a bordered panel (max contrast). */
-export function SparcShadowGrid() {
+export function BeamShadowGrid() {
   return (
     <div className="my-6 rounded-lg border border-default bg-canvas px-8 pt-12 pb-16">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
@@ -121,7 +121,7 @@ export function SparcShadowGrid() {
 /**
  * Font preview card using the Figma typography family token.
  */
-export function SparcFontPreview() {
+export function BeamFontPreview() {
   return (
     <PreviewCard>
       <p
@@ -148,8 +148,8 @@ const SIZE_SCALE: Array<{
   ...(['display-md', 'display-lg', 'display-xl', 'display-2xl'] as const).map((token) => ({ token, size: tokens.typography.fontSize[token], lineHeight: tokens.typography.lineHeight[token], tracking: '-2%', sample: `Aa ${token}` })),
 ];
 
-/** Size scale table — same 4-column PropsTable style as the POD Typography page. */
-export function SparcSizeScale() {
+/** Size scale table — same 4-column PropsTable style as the Beam Typography page. */
+export function BeamSizeScale() {
   return (
     <PropsTable>
       <thead>
@@ -192,8 +192,8 @@ const WEIGHTS: Array<{ className: string; weight: number }> = [
   { className: 'font-bold', weight: 700 },
 ];
 
-/** Weights table — same 2-column PropsTable style as the POD Typography page. */
-export function SparcWeights() {
+/** Weights table — same 2-column PropsTable style as the Beam Typography page. */
+export function BeamWeights() {
   return (
     <PropsTable>
       <thead>
@@ -217,8 +217,8 @@ export function SparcWeights() {
 }
 
 /**
- * Tailwind's default spacing scale — what both SPARC apps actually use.
- * NOT a SPARC token set and NOT in the JSON: this is Tailwind's documented
+ * Tailwind's default spacing scale — what both Beam apps actually use.
+ * NOT a Beam token set and NOT in the JSON: this is Tailwind's documented
  * default (px = step × 4), shown so the page can visualize the convention.
  */
 const SPACING_STEPS = [
@@ -227,7 +227,7 @@ const SPACING_STEPS = [
 ] as const;
 
 /** Spacing scale as horizontal bars using the available accent fill. */
-export function SparcSpacingScale() {
+export function BeamSpacingScale() {
   return (
     <div className="my-6 flex flex-col divide-y divide-black/10 overflow-x-auto rounded border border-black/10 bg-surface">
       {SPACING_STEPS.map((step) => {

@@ -11,7 +11,7 @@ Use this skill when the user asks to run the migrated source command `run`.
 
 # /run
 
-Idempotent dev-server launcher for the POD workspace. Different from
+Idempotent dev-server launcher for the Beam workspace. Different from
 `/restart-server` — this one does NOT kill anything. If a server is already
 up, it just reports the URL.
 

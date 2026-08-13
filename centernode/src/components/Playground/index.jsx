@@ -13,8 +13,8 @@ import {
 import { DEFAULT_TOKENS, FRAME_PRESETS, TEMPLATES, DEMO_CODE } from "@/constants/playground";
 import { parseSchemaFromCode, extractComponentName, updateCodeWithProp, isJsxSnippet, extractJsxTag, parseJsxSnippetSchema } from "@/utils/parser";
 import { tokensToCSS, tokensToTailwind, nodeToJSXFile, downloadFile, groupToCode } from "@/utils/exportHelpers";
-import { POD_SCOPE_NAMES, POD_SCOPE_VALUES, transformIfJSX, canvasManifest } from "@/utils/cfRuntime";
-import { POD_DEFAULT_TOKENS, cfTokensToCSS } from "@/utils/cfTokens";
+import { BEAM_SCOPE_NAMES, BEAM_SCOPE_VALUES, transformIfJSX, canvasManifest } from "@/utils/beamRuntime";
+import { BEAM_DEFAULT_TOKENS, beamTokensToCSS } from "@/utils/beamTokens";
 import CodeEditor from "./CodeEditor";
 import LiveComponent from "./LiveComponent";
 import PropInput from "./PropInput";
@@ -29,7 +29,7 @@ import FillControl from "./FillControl";
 import StrokeControl from "./StrokeControl";
 import TokenEditor from "./TokenEditor";
 import SizeInput from "./SizeInput";
-import CfLibraryPanel from "./CfLibraryPanel";
+import BeamLibraryPanel from "./BeamLibraryPanel";
 import ChangelogPopup from "./ChangelogPopup";
 import Modal from "./Modal";
 import ActivityBar, { DEFAULT_ACTIVITY_ITEMS } from "./ActivityBar";
@@ -55,18 +55,18 @@ function isPropVisibleForVariant(componentName, propKey, currentProps) {
 }
 
 // =============================================================
-// Inject `:root { --color-* }` overrides for POD design system tokens.
-// These override @beam/tokens/theme.css at runtime, so every POD component
+// Inject `:root { --color-* }` overrides for Beam design system tokens.
+// These override @beam/tokens/theme.css at runtime, so every Beam component
 // on the canvas (Button, Checkbox, TextInput…) reflects the change instantly.
 export function usePodTokensCSS(tokens) {
   useEffect(() => {
-    let styleEl = document.getElementById("playground-pod-tokens");
+    let styleEl = document.getElementById("playground-beam-tokens");
     if (!styleEl) {
       styleEl = document.createElement("style");
-      styleEl.id = "playground-pod-tokens";
+      styleEl.id = "playground-beam-tokens";
       document.head.appendChild(styleEl);
     }
-    styleEl.textContent = cfTokensToCSS(tokens);
+    styleEl.textContent = beamTokensToCSS(tokens);
   }, [tokens]);
 }
 
@@ -855,7 +855,7 @@ export default function ComponentPlayground() {
   // that show props for one node at a time.
   const [selectedNodeIds, setSelectedNodeIds] = useState(() => new Set());
   const [globalTokens, setGlobalTokens] = useState(DEFAULT_TOKENS);
-  const [globalPodTokens, setGlobalPodTokens] = useState(POD_DEFAULT_TOKENS);
+  const [globalPodTokens, setGlobalPodTokens] = useState(BEAM_DEFAULT_TOKENS);
   const [tokensPanelOpen, setTokensPanelOpen] = useState(false);
   // Activity Bar — which side panel is currently open (null = collapsed).
   // Components is the default panel on first load; user can collapse to
@@ -863,7 +863,7 @@ export default function ComponentPlayground() {
   const [activityId, setActivityId] = useState("components");
   // Command palette open state — bound to ⌘K globally.
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [tokensTab, setTokensTab] = useState("pod"); // "pod" | "legacy"
+  const [tokensTab, setTokensTab] = useState("beam"); // "beam" | "legacy"
   const [inspectorTab, setInspectorTab] = useState("props");
   const [showSyntaxHint, setShowSyntaxHint] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
@@ -1070,23 +1070,23 @@ export default function ComponentPlayground() {
       // contribute to the registry. Skipping before isJsxSnippet keeps the
       // parser from crashing on `undefined.replace`.
       if (node.type === "group" || typeof node.code !== "string") continue;
-      // JSX snippet nodes (POD instances) — they USE a component, don't DEFINE one.
+      // JSX snippet nodes (Beam instances) — they USE a component, don't DEFINE one.
       // Skip — they don't contribute to the registry.
       if (isJsxSnippet(node.code)) continue;
       const name = extractComponentName(node.code);
       if (!name || name === "Component") continue; // skip generic / unnamed
       try {
         const transformed = transformIfJSX(node.code);
-        // Skip POD scope params that would clash with a function declared in user code.
+        // Skip Beam scope params that would clash with a function declared in user code.
         const userNames = new Set(
           Array.from(transformed.matchAll(/function\s+([A-Z]\w*)\s*\(/g)).map((m) => m[1])
         );
         const podNames = [];
         const podValues = [];
-        for (let i = 0; i < POD_SCOPE_NAMES.length; i++) {
-          if (userNames.has(POD_SCOPE_NAMES[i])) continue;
-          podNames.push(POD_SCOPE_NAMES[i]);
-          podValues.push(POD_SCOPE_VALUES[i]);
+        for (let i = 0; i < BEAM_SCOPE_NAMES.length; i++) {
+          if (userNames.has(BEAM_SCOPE_NAMES[i])) continue;
+          podNames.push(BEAM_SCOPE_NAMES[i]);
+          podValues.push(BEAM_SCOPE_VALUES[i]);
         }
         // eslint-disable-next-line no-new-func
         const factory = new Function(
@@ -1120,7 +1120,7 @@ export default function ComponentPlayground() {
       [category]: { ...(prev[category] || {}), [key]: value },
     }));
   };
-  const resetPodTokens = () => setGlobalPodTokens(POD_DEFAULT_TOKENS);
+  const resetPodTokens = () => setGlobalPodTokens(BEAM_DEFAULT_TOKENS);
 
   useEffect(() => {
     (async () => {
@@ -1189,7 +1189,7 @@ export default function ComponentPlayground() {
             };
             const cleanedOverrides = {};
             for (const [cat, entries] of Object.entries(n.tokenOverrides || {})) {
-              const refForCat = POD_DEFAULT_TOKENS[cat] || {};
+              const refForCat = BEAM_DEFAULT_TOKENS[cat] || {};
               const staleForCat = STALE_DEFAULTS[cat] || {};
               const kept = {};
               for (const [k, v] of Object.entries(entries || {})) {
@@ -1218,8 +1218,8 @@ export default function ComponentPlayground() {
           return;
         }
       } catch {}
-      // Empty canvas by default — user picks from POD Library or "Add component".
-      // No auto-spawn (DEMO_CODE removed; its `function Button` shadowed POD scope).
+      // Empty canvas by default — user picks from Beam Library or "Add component".
+      // No auto-spawn (DEMO_CODE removed; its `function Button` shadowed Beam scope).
       setNodes([]);
       setInitialized(true);
     })();
@@ -1261,7 +1261,7 @@ export default function ComponentPlayground() {
     setSelectedNodeId(id);
   };
 
-  // Spawn a node from a POD canvasManifest pick (variant × size cell or example).
+  // Spawn a node from a Beam canvasManifest pick (variant × size cell or example).
   // Emits a single-line JSX snippet — LiveComponent transpiles via sucrase at render.
   // `dark` (bool) is locked at spawn-time: comes from sidebar's preview mode.
   // Toggling sidebar later does NOT mutate already-placed nodes.
@@ -1270,7 +1270,7 @@ export default function ComponentPlayground() {
     const cx = (-pan.x + (canvasRef.current?.clientWidth || 800) / 2) / zoom;
     const cy = (-pan.y + (canvasRef.current?.clientHeight || 600) / 2) / zoom;
     const manifestEntry = canvasManifest.components.find((c) => c.name === componentName);
-    // Some POD examples ship a composite `function Foo({prop = "..."}) { ... }` snippet
+    // Some Beam examples ship a composite `function Foo({prop = "..."}) { ... }` snippet
     // (e.g. Dropdown's interactive composite). For those, use parseSchemaFromCode which
     // extracts destructured function params. For plain `<Component .../>` snippets,
     // parseJsxSnippetSchema reads attrs + augments enums via manifest.
@@ -1287,7 +1287,7 @@ export default function ComponentPlayground() {
       props,
       customSize: { width: 240, widthMode: "auto", height: 80, heightMode: "auto" },
       tokenOverrides: {},
-      dark, // per-node theme override (POD .dark scope on wrapper)
+      dark, // per-node theme override (Beam .dark scope on wrapper)
       x: cx - 80,
       y: cy - 40,
     };
@@ -2063,7 +2063,7 @@ export default function ComponentPlayground() {
             className="cn-anim-left"
             style={{ animationDuration: "var(--cn-dur-settled)" }}
           >
-            <CfLibraryPanel
+            <BeamLibraryPanel
               manifest={canvasManifest}
               onAddPodNode={addPodNode}
               nodes={nodes}
@@ -2100,11 +2100,11 @@ export default function ComponentPlayground() {
                 inspector tab style for visual consistency. */}
             <div className="cn-tabs-minimal shrink-0">
               <button
-                onClick={() => setTokensTab("pod")}
-                aria-pressed={tokensTab === "pod"}
-                className={tokensTab === "pod" ? "is-active" : ""}
+                onClick={() => setTokensTab("beam")}
+                aria-pressed={tokensTab === "beam"}
+                className={tokensTab === "beam" ? "is-active" : ""}
               >
-                POD
+                Beam
               </button>
               <button
                 onClick={() => setTokensTab("legacy")}
@@ -2120,7 +2120,7 @@ export default function ComponentPlayground() {
               className="flex-1 overflow-y-auto cn-anim-fade"
               style={{ animationDuration: "var(--cn-dur-snappy)" }}
             >
-              {tokensTab === "pod" ? (
+              {tokensTab === "beam" ? (
                 <>
                   <div className="px-4 py-3 flex items-center justify-between">
                     <span className="cn-caption">Live override of @beam/tokens</span>
@@ -2606,7 +2606,7 @@ export default function ComponentPlayground() {
                 )}
 
                 {inspectorTab === "tokens" && (() => {
-                  // Scope tokens to those the SELECTED VARIANT of the POD component actually
+                  // Scope tokens to those the SELECTED VARIANT of the Beam component actually
                   // consumes. Common tokens (entry.tokens) merge with variant-specific
                   // (entry.variantTokens[currentVariant]). Fallback to full palette for
                   // unknown components / non-JSX nodes.
@@ -2619,7 +2619,7 @@ export default function ComponentPlayground() {
                     const entry = canvasManifest.components.find((c) => c.name === tag);
                     const hasAllowlist = entry?.tokens?.length || entry?.variantTokens;
                     if (hasAllowlist) {
-                      // Not every POD component uses a prop literally named
+                      // Not every Beam component uses a prop literally named
                       // `variant` — Badge drives its theming through `color`,
                       // for example. Locate the prop that actually carries
                       // one of the manifest's variant values.

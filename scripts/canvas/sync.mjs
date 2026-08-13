@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * canvas sync — single source of truth for adding components to POD.
+ * canvas sync — single source of truth for adding components to Beam.
  *
  * What it does:
  *   1. Scans `packages/ui/src/<dir>/` for component directories
@@ -9,8 +9,8 @@
  *   3. Re-generates `packages/ui/tsup.config.ts` entry list.
  *   4. Re-generates `packages/ui/package.json` `exports` section
  *      (preserves manual fields, only rewrites subpath exports).
- *   5. Re-generates `centernode/src/utils/cfRuntime.js`
- *      imports + POD_COMPONENTS map.
+ *   5. Re-generates `centernode/src/utils/beamRuntime.js`
+ *      imports + BEAM_COMPONENTS map.
  *
  * Workflow for adding a new component (e.g. Switch):
  *   - Create packages/ui/src/switch/switch.tsx (the component)
@@ -32,7 +32,7 @@ const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '../..');
 const UI_SRC = path.join(ROOT, 'packages/ui/src');
 const UI_PKG = path.join(ROOT, 'packages/ui');
-const CENTERNODE_RUNTIME = path.join(ROOT, 'centernode/src/utils/cfRuntime.js');
+const CENTERNODE_RUNTIME = path.join(ROOT, 'centernode/src/utils/beamRuntime.js');
 
 const SKIP_DIRS = new Set(['lib']);
 const SKIP_PREFIX = '_';
@@ -159,14 +159,14 @@ function writePackageJsonExports(components) {
   writeJSON(file, pkg);
 }
 
-// ── 5. Generate centernode cfRuntime.js (POD_COMPONENTS map) ──────────────
+// ── 5. Generate centernode beamRuntime.js (BEAM_COMPONENTS map) ──────────────
 function writeCenternodeRuntime(components) {
   if (!fs.existsSync(CENTERNODE_RUNTIME)) return; // optional — only if centernode present
 
   const withMeta = components.filter((c) => c.hasCanvasMeta);
 
   let head = `/**
- * POD design system integration for the playground runtime.
+ * Beam design system integration for the playground runtime.
  * Components below are AUTO-INJECTED by scripts/canvas/sync.mjs.
  * Any component with a packages/ui/src/<dir>/canvas.ts file shows up here.
  *
@@ -182,11 +182,11 @@ function writeCenternodeRuntime(components) {
   imports += `import { canvasManifest } from "@beam/ui/canvas";\n`;
   imports += `import { transform } from "sucrase";\n\n`;
 
-  // POD_COMPONENTS includes primary + all extraScope sub-primitives so composite
+  // BEAM_COMPONENTS includes primary + all extraScope sub-primitives so composite
   // snippets (function components) can reference DropdownMenu, DropdownItem, etc.
   const allNames = withMeta.flatMap((c) => [c.componentName, ...c.extraScope]);
   const componentEntries = allNames.map((n) => `  ${n}`).join(',\n');
-  const podComponentsBlock = `export const POD_COMPONENTS = {\n${componentEntries}\n};\nexport { canvasManifest };\n\n`;
+  const podComponentsBlock = `export const BEAM_COMPONENTS = {\n${componentEntries}\n};\nexport { canvasManifest };\n\n`;
 
   const tail = `// JSX heuristics — match a tag opener like \`<Button\` or \`<div className\`.
 // Cheap pre-filter so we skip sucrase entirely for plain h() code.
@@ -214,8 +214,8 @@ export function transformIfJSX(code) {
 
 // Names + values for \`new Function(...)\` factory. Order MUST match between
 // \`paramNames\` and \`paramValues\` when invoking.
-export const POD_SCOPE_NAMES = Object.keys(POD_COMPONENTS);
-export const POD_SCOPE_VALUES = Object.values(POD_COMPONENTS);
+export const BEAM_SCOPE_NAMES = Object.keys(BEAM_COMPONENTS);
+export const BEAM_SCOPE_VALUES = Object.values(BEAM_COMPONENTS);
 `;
 
   fs.writeFileSync(CENTERNODE_RUNTIME, head + imports + podComponentsBlock + tail);
@@ -242,7 +242,7 @@ function main() {
 
   writeCenternodeRuntime(components);
   if (fs.existsSync(CENTERNODE_RUNTIME)) {
-    console.log('[canvas-sync] wrote centernode/src/utils/cfRuntime.js');
+    console.log('[canvas-sync] wrote centernode/src/utils/beamRuntime.js');
   }
 
   console.log('[canvas-sync] ✓ done');

@@ -11,7 +11,7 @@ Use this skill when the user asks to run the migrated source command `restart-se
 
 # /restart-server
 
-Sat-set restart of POD repo dev servers. Common reason to run:
+Sat-set restart of Beam repo dev servers. Common reason to run:
 - Docs page didn't update after `/sync-figma`.
 - Centernode canvas doesn't reflect a fresh `tsup` rebuild.
 - Vite or Turbopack reports stale module / HMR confusion.

@@ -6,7 +6,7 @@
 
 ## Context
 
-The pod-native-design-system codebase currently has color tokens whose names
+The Beam-Design-System codebase currently has color tokens whose names
 and values have drifted from the canonical Figma source. The designer has now
 exported the official Figma token system as three W3C-format JSON files:
 
@@ -376,7 +376,7 @@ packages/ui/src/tooltip/tooltip.tsx
 packages/ui/src/lib/focus-ring.ts
 apps/docs/src/**/*.mdx                         — sweep for old class names
 apps/docs/src/components/docs/*.tsx            — sweep for old class names
-centernode/src/utils/cfRuntime.js             — sweep for old token names
+centernode/src/utils/beamRuntime.js             — sweep for old token names
 packages/tokens/figma-exports/Mode 1.tokens.json              — new file (traceability)
 packages/tokens/figma-exports/Light Theme.tokens.json         — new file
 packages/tokens/figma-exports/Dark Theme.tokens.json          — new file

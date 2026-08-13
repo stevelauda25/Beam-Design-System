@@ -1,26 +1,26 @@
 import type { Annotation } from 'agentation';
 
-// POD-aware enrichment of agentation output. When user adds an annotation,
-// we prepend POD context so Claude eksekusi mengikuti PAKEM rule client-test.
+// Beam-aware enrichment of agentation output. When user adds an annotation,
+// we prepend Beam context so Claude eksekusi mengikuti PAKEM rule client-test.
 //
 // Why: agentation captures DOM/React metadata generic. It tidak tahu:
 //   - bahwa Button/Checkbox/SearchInput/Tooltip itu primitif WAJIB dipakai
 //   - bahwa accent-* itu sacred token (jangan diubah)
-//   - bahwa local component harus pakai POD tokens (no hex)
+//   - bahwa local component harus pakai Beam tokens (no hex)
 //
 // Source of truth untuk daftar component + token = @beam/ui/AGENTS.md
 // yang di-ship dalam npm package. Update otomatis pas `npm update`.
 
-const POD_PRIMITIVES = new Set(['Button', 'Checkbox', 'SearchInput', 'Tooltip']);
+const BEAM_PRIMITIVES = new Set(['Button', 'Checkbox', 'SearchInput', 'Tooltip']);
 
 function detectPodComponent(annotation: Annotation): string | null {
-  // Cek apakah element ini POD primitive berdasarkan name yang agentation deteksi.
+  // Cek apakah element ini Beam primitive berdasarkan name yang agentation deteksi.
   const name = annotation.element;
-  if (POD_PRIMITIVES.has(name)) return name;
+  if (BEAM_PRIMITIVES.has(name)) return name;
 
   // Fallback: cek reactComponents path
   const rc = annotation.reactComponents ?? '';
-  for (const prim of POD_PRIMITIVES) {
+  for (const prim of BEAM_PRIMITIVES) {
     if (rc.includes(`<${prim}`) || rc.includes(`<${prim}>`)) return prim;
   }
   return null;
@@ -36,13 +36,13 @@ function enrichSingle(annotation: Annotation): string {
   lines.push('');
 
   if (podMatch) {
-    lines.push(`**POD context:** Target is \`<${podMatch}>\` from \`@beam/ui\` (a tracked primitive).`);
+    lines.push(`**Beam context:** Target is \`<${podMatch}>\` from \`@beam/ui\` (a tracked primitive).`);
     lines.push(`→ Edit MUST keep this as \`<${podMatch}>\`. Don't replace with native \`<button>\`/\`<input>\`.`);
     lines.push(`→ Available props/variants: see \`node_modules/@beam/ui/AGENTS.md\` (ground truth, auto-syncs on npm update).`);
   } else {
-    lines.push(`**POD context:** Target is a **local component**, not a POD primitive.`);
-    lines.push(`→ Any styling change MUST use POD semantic tokens (\`bg-canvas\`, \`text-text-primary\`, etc.). No hex codes.`);
-    lines.push(`→ Check if intent maps to a POD primitive — if "ganti ke checkbox" or similar, use \`<Checkbox>\` from \`@beam/ui\`.`);
+    lines.push(`**Beam context:** Target is a **local component**, not a Beam primitive.`);
+    lines.push(`→ Any styling change MUST use Beam semantic tokens (\`bg-canvas\`, \`text-text-primary\`, etc.). No hex codes.`);
+    lines.push(`→ Check if intent maps to a Beam primitive — if "ganti ke checkbox" or similar, use \`<Checkbox>\` from \`@beam/ui\`.`);
   }
 
   lines.push('');
@@ -58,12 +58,12 @@ export function enrichAgentationOutput(annotations: Annotation[]): string {
   if (annotations.length === 0) return '';
 
   const header = [
-    '# Agentation Feedback — POD-enriched',
+    '# Agentation Feedback — Beam-enriched',
     '',
-    'You are editing a project that uses **CF Design System** (`@beam/ui` + `@beam/tokens`).',
+    'You are editing a project that uses **Beam Design System** (`@beam/ui` + `@beam/tokens`).',
     '',
     '**Hard rules** (zero exceptions — see `client-test/CLAUDE.md`):',
-    '- Every UI change must use POD primitives + semantic tokens.',
+    '- Every UI change must use Beam primitives + semantic tokens.',
     '- Sacred tokens (`accent-*`, `danger-*`, `warning-*`, etc.) are never modified.',
     '- New colors → `experiment-<name>` token + targeted variant override.',
     '- No hex codes, no `rgb()`, no `dark:` modifiers, no native `<button>`/`<input>`.',

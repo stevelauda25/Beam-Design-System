@@ -1,7 +1,7 @@
 // =============================================================
 // JSX-snippet helpers — used by canvas nodes that contain a single component
 // instance like `<Button variant="primary" size="md">Save changes</Button>`.
-// These are POD design-system instances, not user-defined components.
+// These are Beam design-system instances, not user-defined components.
 // =============================================================
 
 import { VARIANT_PROP_ALIAS } from "./variantAliases.js";

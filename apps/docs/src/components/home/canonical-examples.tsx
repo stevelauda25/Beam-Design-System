@@ -1,5 +1,5 @@
 import { useState, type ComponentType } from 'react';
-import { Activity, Badge, Breadcrumb, Button, Dialog, Dropdown, EditorToolbar, FileCard, Menu, MenuItem, NavigationButton, Select, SharePopover, Table, TextInput, Toast, Tooltip } from '@sparc-ui';
+import { Activity, Badge, Breadcrumb, Button, Dialog, Dropdown, EditorToolbar, FileCard, Menu, MenuItem, NavigationButton, Select, SharePopover, Table, TextInput, Toast, Tooltip } from '@beam/ui';
 import folderIcon from '../../../../../../Beam-App-Project/public/assets/folder.svg';
 import selectChevron from '../../../../../../Beam-App-Project/public/assets/api-chevron.svg';
 import selectedCheck from '../../../../../../Beam-App-Project/public/assets/download-success.svg';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavigationButton } from '@sparc-ui';
+import { NavigationButton } from '@beam/ui';
 import personalIcon from '../../../../../../Beam-App-Project/public/assets/personal.svg';
 import panelIcon from '../../../../../../Beam-App-Project/public/assets/panel.svg';
 import panelExpandIcon from '../../../../../../Beam-App-Project/public/assets/panel-expand.svg';

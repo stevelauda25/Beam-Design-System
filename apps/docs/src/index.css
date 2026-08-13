@@ -89,7 +89,7 @@ body { margin: 0; }
 /* Component detail specimens are visual references, not live playgrounds.
    Their forced states remain visible while actions, focus and selection stay
    disabled. Home-page examples remain interactive. */
-.sparc-theme .preview-card {
+.beam-theme .preview-card {
   pointer-events: none;
   user-select: none;
 }
@@ -266,10 +266,10 @@ html.dark      .mdx-content code span { color: var(--shiki-dark);  }
   50%      { transform: scale(1.4); opacity: 0.6; }
 }
 
-/* ── SPARC theme scope for Phase-1 atom pages ───────────────────────────── */
-/* Wraps /components/sparc-* pages so they render with SPARC foundation
-   tokens + Geist font while the rest of the doc site keeps POD styling. */
-.sparc-theme {
+/* ── Beam theme scope for Phase-1 atom pages ───────────────────────────── */
+/* Wraps /components/beam-* pages so they render with Beam foundation
+   tokens + Geist font while the rest of the doc site keeps Beam styling. */
+.beam-theme {
   font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
 
   --color-bg-canvas: 251 250 249;
@@ -287,6 +287,6 @@ html.dark      .mdx-content code span { color: var(--shiki-dark);  }
   --color-border-strong: 207 199 188;
 }
 
-html.dark .sparc-theme {
-  /* SPARC does not define a dark mode; keep POD dark values when forced. */
+html.dark .beam-theme {
+  /* Beam does not define a dark mode; keep Beam dark values when forced. */
 }

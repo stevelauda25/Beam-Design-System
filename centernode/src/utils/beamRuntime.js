@@ -1,5 +1,5 @@
 /**
- * POD design system integration for the playground runtime.
+ * Beam design system integration for the playground runtime.
  * Components below are AUTO-INJECTED by scripts/canvas/sync.mjs.
  * Any component with a packages/ui/src/<dir>/canvas.ts file shows up here.
  *
@@ -20,7 +20,7 @@ import { Tooltip } from "@beam/ui/tooltip";
 import { canvasManifest } from "@beam/ui/canvas";
 import { transform } from "sucrase";
 
-export const POD_COMPONENTS = {
+export const BEAM_COMPONENTS = {
   Badge,
   Button,
   ButtonGroup,
@@ -65,5 +65,5 @@ export function transformIfJSX(code) {
 
 // Names + values for `new Function(...)` factory. Order MUST match between
 // `paramNames` and `paramValues` when invoking.
-export const POD_SCOPE_NAMES = Object.keys(POD_COMPONENTS);
-export const POD_SCOPE_VALUES = Object.values(POD_COMPONENTS);
+export const BEAM_SCOPE_NAMES = Object.keys(BEAM_COMPONENTS);
+export const BEAM_SCOPE_VALUES = Object.values(BEAM_COMPONENTS);

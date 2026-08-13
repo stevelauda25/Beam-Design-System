@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo, createElement, Fragment } from "react";
-import { POD_SCOPE_NAMES, POD_SCOPE_VALUES, transformIfJSX } from "@/utils/cfRuntime";
+import { BEAM_SCOPE_NAMES, BEAM_SCOPE_VALUES, transformIfJSX } from "@/utils/beamRuntime";
 const h = createElement;
 
 export default function LiveComponent({ code, componentName, props, registry }) {
@@ -137,11 +137,11 @@ export default function LiveComponent({ code, componentName, props, registry }) 
         targetName = "HtmlWrapper";
       }
 
-      // Build argument list: standard scope + POD design system + all user-registered components.
+      // Build argument list: standard scope + Beam design system + all user-registered components.
       // Strict-mode `new Function` rejects duplicate identifiers — if the user code
       // declares `function Button() {}` or the registry already has a `Button`, we
-      // can't also inject POD's `Button` as a scope param. Filter conflicts out;
-      // user code wins (they explicitly shadowed POD).
+      // can't also inject Beam's `Button` as a scope param. Filter conflicts out;
+      // user code wins (they explicitly shadowed Beam).
       const registryNames = registry ? Object.keys(registry) : [];
       const registryValues = registry ? Object.values(registry) : [];
       const userDeclaredNames = new Set([
@@ -150,10 +150,10 @@ export default function LiveComponent({ code, componentName, props, registry }) 
       ]);
       const podScopeNames = [];
       const podScopeValues = [];
-      for (let i = 0; i < POD_SCOPE_NAMES.length; i++) {
-        if (userDeclaredNames.has(POD_SCOPE_NAMES[i])) continue;
-        podScopeNames.push(POD_SCOPE_NAMES[i]);
-        podScopeValues.push(POD_SCOPE_VALUES[i]);
+      for (let i = 0; i < BEAM_SCOPE_NAMES.length; i++) {
+        if (userDeclaredNames.has(BEAM_SCOPE_NAMES[i])) continue;
+        podScopeNames.push(BEAM_SCOPE_NAMES[i]);
+        podScopeValues.push(BEAM_SCOPE_VALUES[i]);
       }
 
       // eslint-disable-next-line no-new-func

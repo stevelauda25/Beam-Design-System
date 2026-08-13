@@ -381,7 +381,7 @@ export function groupToCode(group, allNodes, format = "jsx-inline") {
 
   const childLines = children
     .map((c) => {
-      // JSX snippet children (POD instances) — inline as written.
+      // JSX snippet children (Beam instances) — inline as written.
       const inner =
         c.code && /^\s*</.test(c.code)
           ? c.code.trim()

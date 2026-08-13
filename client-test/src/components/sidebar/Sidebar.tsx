@@ -26,7 +26,7 @@ function ThemeToggle() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
     try {
-      localStorage.setItem('pod-client-theme', dark ? 'dark' : 'light');
+      localStorage.setItem('beam-client-theme', dark ? 'dark' : 'light');
     } catch {
       /* ignore */
     }
@@ -54,7 +54,7 @@ export function Sidebar() {
           <Sparkles size={16} />
         </div>
         <span className="text-base font-semibold tracking-tight text-text-primary">
-          POD
+          Beam
         </span>
       </div>
 

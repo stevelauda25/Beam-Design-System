@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from '@beam/ui';
 
 // LOCAL — @beam/ui has no generic <Input>. Built here per CLAUDE.md Rule 10
-// using POD semantic tokens (bg-surface, border-border-default, text-text-primary).
+// using Beam semantic tokens (bg-surface, border-border-default, text-text-primary).
 // Promote upstream once design system ships an Input primitive.
 
 export interface TextInputProps

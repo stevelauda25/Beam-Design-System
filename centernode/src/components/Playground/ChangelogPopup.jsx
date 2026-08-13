@@ -44,7 +44,7 @@ const ENTRIES = [
         title: "Inspector — flat sectioned layout",
         items: [
           "Cards dropped from group / component / multi-select inspectors. Sections are now `cn-eyebrow` + content + `cn-divider` — reads like a doc, not nested boxes.",
-          "Tabs use the minimal text + thin underline pattern (`cn-tabs-minimal`) across Properties / Code on groups, Props / Code / Tokens on components, and POD / Component in the Tokens panel. No chip, no glow.",
+          "Tabs use the minimal text + thin underline pattern (`cn-tabs-minimal`) across Properties / Code on groups, Props / Code / Tokens on components, and Beam / Component in the Tokens panel. No chip, no glow.",
           "Identity rows: icon chip (amber-tinted) + inline-editable name + mono meta line (`2 children · ↓ column`) — same pattern across Group / Component / Multi-select for total visual consistency.",
           "Inputs transparent by default — just a thin border. Hover lights the border up; focus turns it amber with a soft ring. No filled chrome competing with the value.",
         ],
@@ -101,10 +101,10 @@ const ENTRIES = [
       {
         title: "Dark mode for centernode itself",
         items: [
-          "Centernode app now starts in dark mode by default — matches the theme POD components actually live in on the canvas. Inspector, sidebar, top bar, props panel, code editor: all dark-aware.",
+          "Centernode app now starts in dark mode by default — matches the theme Beam components actually live in on the canvas. Inspector, sidebar, top bar, props panel, code editor: all dark-aware.",
           "Theme toggle (sun / moon icon) in the top header flips the `.dark` class on `<html>`. Choice persists to `localStorage` so reloads keep the picked theme; bootstrap script in `layout.tsx` applies it before React mounts (no flash-of-wrong-theme).",
           "Canvas dot-grid swaps colour with theme — dots stay subtle in both modes instead of burning in dark.",
-          "Previously: centernode was light-only, which clashed with dark POD components dropped onto canvas. Now: canvas chrome and component canvas-mode are independent — sidebar mini-previews still have their own light/dark toggle.",
+          "Previously: centernode was light-only, which clashed with dark Beam components dropped onto canvas. Now: canvas chrome and component canvas-mode are independent — sidebar mini-previews still have their own light/dark toggle.",
         ],
       },
       {
@@ -173,7 +173,7 @@ const ENTRIES = [
         title: "canvas-sync infra fix",
         items: [
           "`scripts/canvas/sync.mjs` now reads `name:` field from each `canvas.ts` instead of always deriving from `kebabToPascal(dir)`. Fixes plural-folder / singular-export mismatch (`badges/` → `Badge`, `tabs/` → `Tab`).",
-          "Regenerated `centernode/src/utils/cfRuntime.js` — imports now correctly reference `Badge` and `Tab` (was `Badges` / `Tabs`, breaking build).",
+          "Regenerated `centernode/src/utils/beamRuntime.js` — imports now correctly reference `Badge` and `Tab` (was `Badges` / `Tabs`, breaking build).",
         ],
       },
     ],
@@ -183,12 +183,12 @@ const ENTRIES = [
     date: "2026-05-13",
     sections: [
       {
-        title: "POD Components live in the canvas",
+        title: "Beam Components live in the canvas",
         items: [
-          "Left sidebar lists every POD primitive from `@beam/ui` (Button, Checkbox, TextInput, SearchInput, Switch).",
+          "Left sidebar lists every Beam primitive from `@beam/ui` (Button, Checkbox, TextInput, SearchInput, Switch).",
           "Each variant has a live mini-preview rendered with the actual component — click to spawn at canvas center.",
           "Examples row per component (Loading / Disabled / With error / etc.) — preset variants ready to drop.",
-          "Sidebar auto-discovers new POD components via `@beam/ui/canvas` manifest. No manual wiring.",
+          "Sidebar auto-discovers new Beam components via `@beam/ui/canvas` manifest. No manual wiring.",
         ],
       },
       {
@@ -196,7 +196,7 @@ const ENTRIES = [
         items: [
           "Theme toggle in sidebar header (sun / moon icon).",
           "Affects sidebar previews. Dropped nodes lock the mode they were spawned in — toggling later doesn't ripple to existing nodes on canvas.",
-          "Scope uses POD's `.dark` class on the preview wrapper. CSS variables cascade correctly.",
+          "Scope uses Beam's `.dark` class on the preview wrapper. CSS variables cascade correctly.",
         ],
       },
       {
@@ -210,15 +210,15 @@ const ENTRIES = [
       {
         title: "Font & visual parity",
         items: [
-          "Centernode body now uses Inter via `next/font/google` — matches POD docs visually.",
-          "POD's compiled CSS no longer ships `@tailwind base` (was leaking element-level preflight). Centernode UI restored.",
+          "Centernode body now uses Inter via `next/font/google` — matches Beam docs visually.",
+          "Beam's compiled CSS no longer ships `@tailwind base` (was leaking element-level preflight). Centernode UI restored.",
         ],
       },
       {
         title: "Bug fixes",
         items: [
           "HTML templates (Switch / Knob / Slider HTML demos) no longer fail on JSX transform — Sucrase now skips the iframe branch.",
-          "Duplicate parameter conflict resolved (when both user code and POD scope declare `Button` etc.).",
+          "Duplicate parameter conflict resolved (when both user code and Beam scope declare `Button` etc.).",
           "Demo \"Click me\" node no longer auto-spawns on startup. Canvas starts empty with sidebar prompt.",
           "Stale storage entries from older versions get filtered on load.",
         ],
@@ -316,7 +316,7 @@ export default function ChangelogPopup({ open, onClose }) {
         <span className="flex items-center gap-1.5">
           Press <span className="cn-chip">Esc</span> to close
         </span>
-        <span>POD design system tracks separately</span>
+        <span>Beam design system tracks separately</span>
       </div>
     </Modal>
   );

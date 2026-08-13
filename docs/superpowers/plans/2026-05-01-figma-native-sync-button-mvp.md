@@ -250,7 +250,7 @@ Most of Phase 0 from the spec is already done (`.figma/` artifacts exist, `pnpm 
 
 - [ ] **Step 4.1: USER ACTION — Create Vercel project for docs**
 
-**[USER ACTION REQUIRED]** Vercel dashboard → Add New → Project → Import Git Repository → select `pod-native-design-system`.
+**[USER ACTION REQUIRED]** Vercel dashboard → Add New → Project → Import Git Repository → select `Beam-Design-System`.
 
 Settings:
 - **Root directory:** `apps/docs`
@@ -765,7 +765,7 @@ The default `GITHUB_TOKEN` in Phase 1/2 commits as `github-actions[bot]`. For a 
 
 **[USER ACTION REQUIRED]** Personal account → Settings → Developer settings → GitHub Apps → New GitHub App.
 
-- **Name:** `pod-figma-sync` (or similar; must be globally unique)
+- **Name:** `beam-figma-sync` (or similar; must be globally unique)
 - **Homepage URL:** repo URL
 - **Webhook:** Inactive (we don't receive webhooks ON the App; the app only acts as identity)
 - **Repository permissions:**
@@ -783,7 +783,7 @@ On the App's page → Private keys → Generate a private key. Save the `.pem` f
 
 - [ ] **Step 14.3: USER ACTION — Install the App on the repo**
 
-App page → Install App → install on the org/account that owns `pod-native-design-system` → select "Only select repositories" → choose `pod-native-design-system`.
+App page → Install App → install on the org/account that owns `Beam-Design-System` → select "Only select repositories" → choose `Beam-Design-System`.
 
 Note the Installation ID (visible in the URL after install: `.../installations/<INSTALLATION_ID>`).
 
@@ -821,7 +821,7 @@ Replace the existing `token: ${{ secrets.GITHUB_TOKEN }}` line with `token: ${{ 
 
 - [ ] **Step 14.6: Test the App token end-to-end**
 
-Force drift, trigger workflow. Expected: PR opens, commit author is `pod-figma-sync[bot]` (not `github-actions[bot]`).
+Force drift, trigger workflow. Expected: PR opens, commit author is `beam-figma-sync[bot]` (not `github-actions[bot]`).
 
 - [ ] **Step 14.7: Commit**
 
@@ -1233,10 +1233,10 @@ git commit -m "feat(webhook-receiver): http handler with hmac + dispatch"
 
 - [ ] **Step 19.1: USER ACTION — Create separate Vercel project**
 
-**[USER ACTION REQUIRED]** Vercel dashboard → Add New → Project → Import Git Repository → select `pod-native-design-system`.
+**[USER ACTION REQUIRED]** Vercel dashboard → Add New → Project → Import Git Repository → select `Beam-Design-System`.
 
 Settings:
-- **Project name:** `pod-figma-webhook-receiver` (must differ from the docs project)
+- **Project name:** `beam-figma-webhook-receiver` (must differ from the docs project)
 - **Root directory:** `apps/webhook-receiver`
 - **Framework preset:** Other
 - **Build command:** (leave empty — Vercel auto-detects functions in `api/`)
@@ -1244,7 +1244,7 @@ Settings:
 - **Production branch:** `main`
 - **Privacy:** Private
 
-Deploy. Note the production URL (`https://pod-figma-webhook-receiver.vercel.app/api/figma-webhook` or similar).
+Deploy. Note the production URL (`https://beam-figma-webhook-receiver.vercel.app/api/figma-webhook` or similar).
 
 Confirm in chat: "webhook receiver deployed at <url>".
 
@@ -1255,7 +1255,7 @@ Vercel project → Settings → Environment Variables → add for **Production**
 - `GITHUB_APP_ID` = same as repo secret `BOT_GITHUB_APP_ID`
 - `GITHUB_APP_PRIVATE_KEY` = same as repo secret `BOT_GITHUB_APP_PRIVATE_KEY` (paste the whole `.pem`)
 - `GITHUB_INSTALLATION_ID` = same as repo secret `BOT_GITHUB_APP_INSTALLATION_ID`
-- `GITHUB_REPO` = `<owner>/pod-native-design-system`
+- `GITHUB_REPO` = `<owner>/Beam-Design-System`
 
 Redeploy to pick up env vars.
 
@@ -1295,7 +1295,7 @@ curl -X POST 'https://api.figma.com/v2/webhooks' \
     \"team_id\": \"$TEAM_ID\",
     \"endpoint\": \"$WEBHOOK_URL\",
     \"passcode\": \"$WEBHOOK_SECRET\",
-    \"description\": \"pod-native-design-system auto-sync\"
+    \"description\": \"Beam-Design-System auto-sync\"
   }"
 ```
 
@@ -1308,7 +1308,7 @@ Expected: 200 with the new webhook's `id`. Save it (`FIGMA_WEBHOOK_ID`).
 In Figma: open the design system file → make a tiny change to Button → publish library (top-right "Publish library" button).
 
 Within ~30 seconds:
-1. Vercel logs for `pod-figma-webhook-receiver` show a 202 response.
+1. Vercel logs for `beam-figma-webhook-receiver` show a 202 response.
 2. GitHub Actions tab shows a new `figma-sync` run triggered by `repository_dispatch`.
 
 Confirm in chat: "figma webhook fired, action triggered".
@@ -1444,7 +1444,7 @@ Drift is detected and synced by `.github/workflows/figma-sync.yml`. Triggers:
 - **Cron (nightly safety net):** 02:00 UTC every day.
 - **Manual:** Actions tab → figma-sync → Run workflow.
 
-Each run produces a PR on branch `figma-sync/<run_id>` with a Vercel preview deploy. The PR's commit author is `pod-figma-sync[bot]` (dedicated GitHub App).
+Each run produces a PR on branch `figma-sync/<run_id>` with a Vercel preview deploy. The PR's commit author is `beam-figma-sync[bot]` (dedicated GitHub App).
 
 To investigate why a sync produced unexpected output, run `/sync-figma <slug>` locally — same engine, same prompt, full conversation visibility.
 ```

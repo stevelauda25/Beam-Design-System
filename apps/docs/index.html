@@ -7,7 +7,7 @@
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('pod-docs-theme');
+          var stored = localStorage.getItem('beam-docs-theme');
           var sys = window.matchMedia('(prefers-color-scheme: dark)').matches;
           var dark = stored === 'dark' || (!stored && sys);
           if (dark) document.documentElement.classList.add('dark');

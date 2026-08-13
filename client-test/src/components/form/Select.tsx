@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { cn } from '@beam/ui';
 
 // LOCAL — @beam/ui has no <Select>. Built here per CLAUDE.md Rule 10
-// using POD semantic tokens. Native <select> for now (no listbox / search).
+// using Beam semantic tokens. Native <select> for now (no listbox / search).
 // Promote upstream once design system ships a Select primitive with floating menu.
 
 export interface SelectOption {

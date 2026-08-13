@@ -1,7 +1,7 @@
 /**
- * POD design system tokens — color picker–friendly defaults for the Tokens panel.
+ * Beam design system tokens — color picker–friendly defaults for the Tokens panel.
  *
- * POD's theme.css stores colors as "R G B" triples (so Tailwind can apply alpha
+ * Beam's theme.css stores colors as "R G B" triples (so Tailwind can apply alpha
  * via rgb(var(--color-x) / <alpha-value>)). The Tokens panel wants hex for the
  * native color picker. We keep two views:
  *   - default hex values here (read by the UI)
@@ -10,7 +10,7 @@
 
 // Hex values mirror the .dark block of packages/tokens/src/theme.css —
 // centernode's canvas always runs against the dark palette.
-export const POD_DEFAULT_TOKENS = {
+export const BEAM_DEFAULT_TOKENS = {
   colors: {
     // Backgrounds
     "bg-canvas":   "#09090b",
@@ -144,7 +144,7 @@ export function hexToRgbTriple(hex) {
   return `${r} ${g} ${b}`;
 }
 
-export function cfTokensToCSS(tokens) {
+export function beamTokensToCSS(tokens) {
   let css = ":root {";
   for (const [key, val] of Object.entries(tokens.colors || {})) {
     css += `--color-${key}: ${hexToRgbTriple(val)};`;

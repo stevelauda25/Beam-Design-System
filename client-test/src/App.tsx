@@ -13,7 +13,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { Agentation } from 'agentation';
 import { IssueCard } from './components/IssueCard.js';
-import { enrichAgentationOutput } from './lib/cf-agentation.js';
+import { enrichAgentationOutput } from './lib/beam-agentation.js';
 
 function ThemeToggle() {
   // Initial value comes from the bootstrap script in index.html (default = dark).
@@ -25,7 +25,7 @@ function ThemeToggle() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
     try {
-      localStorage.setItem('pod-client-theme', dark ? 'dark' : 'light');
+      localStorage.setItem('beam-client-theme', dark ? 'dark' : 'light');
     } catch {
       /* ignore quota / private mode */
     }
@@ -71,7 +71,7 @@ function Header() {
             <Sparkles size={16} />
           </div>
           <span className="text-base font-semibold tracking-tight text-text-primary">
-            POD
+            Beam
           </span>
         </a>
 
@@ -173,7 +173,7 @@ function Hero() {
           </h1>
 
           <p className="max-w-xl text-base text-text-muted md:text-lg">
-            POD ships React components, design tokens, and a docs site — all
+            Beam ships React components, design tokens, and a docs site — all
             token-driven, dark-mode-ready, and synced from Figma. No handoffs.
             No drift.
           </p>
@@ -351,7 +351,7 @@ export default function App() {
           onSubmit={(_output, annotations) => {
             const enriched = enrichAgentationOutput(annotations);
             navigator.clipboard.writeText(enriched);
-            console.info('[POD-Agentation] Enriched output copied:', enriched);
+            console.info('[Beam-Agentation] Enriched output copied:', enriched);
           }}
           onAnnotationAdd={(annotation) => {
             // Also copy single annotation enriched on add — convenience for owner workflow.
