@@ -1,0 +1,34 @@
+import { Badge } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+
+<PageHeader
+  title="Badge"
+  description="One compact Beam badge structure with semantic color variants."
+/>
+
+## Variants
+
+<PreviewCard compact>
+  <div className="flex items-start gap-6">
+    {['neutral', 'accent', 'success', 'warning', 'error', 'info'].map((variant) => (
+      <div className="flex h-[44px] min-w-[72px] flex-col items-center gap-2" key={variant}>
+        <Badge variant={variant}>{variant[0].toUpperCase() + variant.slice(1)}</Badge>
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">
+          {variant[0].toUpperCase() + variant.slice(1)}
+        </span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact>
+  <tbody>
+    <tr><th>Height</th><td>18px</td></tr>
+    <tr><th>Padding</th><td>4px 8px 4px 6px</td></tr>
+    <tr><th>Radius</th><td>9999px</td></tr>
+    <tr><th>Typography</th><td>Inter · 10px / 10px · Regular</td></tr>
+    <tr><th>Color</th><td>Semantic variables for each variant</td></tr>
+  </tbody>
+</PropsTable>

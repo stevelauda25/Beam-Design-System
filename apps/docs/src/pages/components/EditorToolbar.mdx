@@ -1,0 +1,39 @@
+import { EditorToolbar } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import chevron from '../../../../../../Beam-App-Project/public/assets/editor-chevron.svg';
+import bold from '../../../../../../Beam-App-Project/public/assets/editor-bold.svg';
+import italic from '../../../../../../Beam-App-Project/public/assets/editor-italic.svg';
+import underline from '../../../../../../Beam-App-Project/public/assets/editor-underline.svg';
+import divider from '../../../../../../Beam-App-Project/public/assets/editor-divider.svg';
+import list from '../../../../../../Beam-App-Project/public/assets/editor-list.svg';
+import link from '../../../../../../Beam-App-Project/public/assets/editor-link.svg';
+import image from '../../../../../../Beam-App-Project/public/assets/editor-image.svg';
+import check from '../../../../../../Beam-App-Project/public/assets/download-success.svg';
+
+export const icons = { chevron:<img src={chevron} alt=""/>, bold:<img src={bold} alt=""/>, italic:<img src={italic} alt=""/>, underline:<img src={underline} alt=""/>, divider:<img src={divider} alt=""/>, list:<img src={list} alt=""/>, link:<img src={link} alt=""/>, image:<img src={image} alt=""/>, check:<img src={check} alt=""/> };
+
+<PageHeader title="Editor Toolbar" description="The complete Beam-App-Project formatting toolbar as one component." />
+
+## States
+
+<PreviewCard compact extraTall noClip>
+  <div className="grid w-full grid-cols-3 justify-items-center gap-x-8 gap-y-5">
+    {[
+      ['Default','default'],['Button hover','hover'],['Button pressed','pressed'],['Button selected','selected'],['Menu open','menu-open']
+    ].map(([label,state]) => (
+      <div className="flex min-h-[52px] w-[300px] flex-col items-center gap-2" key={state}>
+        <EditorToolbar icons={icons} state={state} />
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{label}</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Toolbar height</th><td>24px</td></tr><tr><th>Group gap</th><td>4px</td></tr>
+  <tr><th>Group padding</th><td>2px</td></tr><tr><th>Group radius</th><td>6px</td></tr>
+  <tr><th>Heading trigger</th><td>98px × 20px</td></tr><tr><th>Action</th><td>20px with 12px icon</td></tr>
+  <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

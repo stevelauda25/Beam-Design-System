@@ -1,0 +1,49 @@
+import { NavigationButton, NavSection, SidebarNavigation } from '@sparc-ui';
+import { Folder, KeyRound, PanelLeft, Search, Settings, UserRound } from 'lucide-react';
+
+<PageHeader
+  title="Sidebar Navigation"
+  description="Organism — the complete collapsible navigation used by Beam-App-Project."
+/>
+
+## Complete composition
+
+<PreviewCard align="start">
+  <div className="h-[520px] overflow-hidden rounded border border-black/10">
+    <SidebarNavigation
+      header={
+        <div className="flex items-center gap-1">
+          <NavigationButton label="Personal" leading={<UserRound />} trailing={<PanelLeft className="size-3" />} />
+        </div>
+      }
+      actions={
+        <>
+          <NavigationButton label="Search all files" leading={<Search />} trailing={<kbd className="text-[10px] text-[#8f8f8f]">⌘K</kbd>} />
+          <NavigationButton label="New folder" leading={<Folder />} />
+        </>
+      }
+      footer={
+        <>
+          <NavSection divided>
+            <NavigationButton label="API Keys" leading={<KeyRound />} />
+            <NavigationButton label="Settings" leading={<Settings />} />
+          </NavSection>
+          <NavigationButton label="Michele J." leading={<UserRound />} />
+        </>
+      }
+    >
+      <NavSection>
+        <NavigationButton label="Folder 001" trailing={<span>4</span>} active />
+        <NavigationButton label="Product Resources" trailing={<span>3</span>} />
+        <NavigationButton label="Website Assets" trailing={<span>3</span>} />
+      </NavSection>
+    </SidebarNavigation>
+  </div>
+</PreviewCard>
+
+## Atomic composition
+
+The organism composes Navigation Button atoms and Navigation Section molecules.
+It owns the 216px expanded shell, 42px collapsed shell, scrolling content region,
+and persistent footer placement.
+

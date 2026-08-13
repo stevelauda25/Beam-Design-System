@@ -1,0 +1,40 @@
+import { Button } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+
+export const CircleIcon = () => <span className="block size-3 rounded-full border border-current" />;
+
+<PageHeader
+  title="Button"
+  description="The icon-and-label button used throughout Beam-App-Project."
+/>
+
+## States
+
+<PreviewCard compact>
+  <div className="grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
+    {[
+      ['Default', 'default'],
+      ['Hover', 'hover'],
+      ['Pressed', 'pressed'],
+      ['Disabled', 'disabled'],
+    ].map(([label, state]) => (
+      <div className="flex h-[52px] w-[72px] flex-col items-center gap-2" key={state}>
+        <Button visualState={state} leftIcon={<CircleIcon />}>Button</Button>
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{label}</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact>
+  <tbody>
+    <tr><th>Height</th><td>26px</td></tr>
+    <tr><th>Padding</th><td>4px 8px</td></tr>
+    <tr><th>Gap</th><td>6px</td></tr>
+    <tr><th>Icon</th><td>12px</td></tr>
+    <tr><th>Radius</th><td>4px</td></tr>
+    <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+  </tbody>
+</PropsTable>

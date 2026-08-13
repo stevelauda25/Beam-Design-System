@@ -1,0 +1,36 @@
+import { Tooltip } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+
+export const Anchor = () => <span className="block size-3 rounded-full border border-[rgb(var(--color-gray-975))]" />;
+
+<PageHeader title="Tooltip" description="The compact feedback tooltip used in Beam-App-Project." />
+
+## Variants
+
+<PreviewCard compact tall noClip>
+  <div className="flex items-end gap-24 pt-10">
+    {['default','success','error'].map((variant) => (
+      <div className="flex w-[100px] flex-col items-center gap-2" key={variant}>
+        <Tooltip content={variant === 'error' ? 'Copy link failed' : variant === 'success' ? 'Link-copied' : 'Tooltip'} variant={variant} open><Anchor /></Tooltip>
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{variant[0].toUpperCase()+variant.slice(1)}</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Visibility
+
+<PreviewCard compact tall noClip>
+  <div className="flex items-end gap-24 pt-10">
+    <div className="flex w-[100px] flex-col items-center gap-2"><Tooltip content="Tooltip" open={false}><Anchor /></Tooltip><span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Hidden</span></div>
+    <div className="flex w-[100px] flex-col items-center gap-2"><Tooltip content="Tooltip" open><Anchor /></Tooltip><span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Visible</span></div>
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Padding</th><td>4px 12px</td></tr><tr><th>Radius</th><td>6px</td></tr>
+  <tr><th>Pointer</th><td>6px</td></tr><tr><th>Offset</th><td>6px</td></tr>
+  <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

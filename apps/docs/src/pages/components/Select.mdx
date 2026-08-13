@@ -1,0 +1,55 @@
+import { Select } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import chevronIcon from '../../../../../../Beam-App-Project/public/assets/api-chevron.svg';
+import checkIcon from '../../../../../../Beam-App-Project/public/assets/download-success.svg';
+
+export const options = [
+  { value: 'one', label: 'Option one' },
+  { value: 'two', label: 'Option two' },
+  { value: 'three', label: 'Option three' },
+];
+export const Chevron = () => <img src={chevronIcon} alt="" />;
+export const Check = () => <img src={checkIcon} alt="" />;
+
+<PageHeader title="Select" description="One label-and-chevron select structure used throughout Beam-App-Project." />
+
+## States
+
+<PreviewCard compact tall noClip>
+  <div className="flex items-start gap-4">
+    {[
+      ['Default', 'default', ''],
+      ['Hover', 'hover', ''],
+      ['Focused', 'focused', ''],
+      ['Open', 'open', ''],
+      ['Selected', 'selected', 'two'],
+      ['Disabled', 'disabled', ''],
+    ].map(([label, state, value]) => (
+      <div className="flex h-[132px] w-[132px] flex-col items-center justify-between" key={state}>
+        <Select
+          options={options}
+          placeholder="Select"
+          value={value || undefined}
+          visualState={state}
+          chevron={<Chevron />}
+          selectedIndicator={<Check />}
+          aria-label={`${label} select`}
+        />
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{label}</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact>
+  <tbody>
+    <tr><th>Trigger height</th><td>26px</td></tr>
+    <tr><th>Trigger padding</th><td>4px 8px</td></tr>
+    <tr><th>Chevron</th><td>12px</td></tr>
+    <tr><th>Trigger radius</th><td>4px</td></tr>
+    <tr><th>Menu radius</th><td>6px</td></tr>
+    <tr><th>Typography</th><td>Inter · 12px / 18px · Regular</td></tr>
+  </tbody>
+</PropsTable>

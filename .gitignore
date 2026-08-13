@@ -1,0 +1,25 @@
+node_modules
+# dist
+.DS_Store
+*.log
+.vite
+.turbo
+.cache
+
+# Secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+
+# Per-user AI agent / IDE configs (never standardized across team)
+.claude/scheduled_tasks.lock
+.codex/
+.cursor/
+.gemini/
+.vscode/
+.zed/
+.mcp.json
+opencode.json
+config/
+*.log
+apps/docs/dist/

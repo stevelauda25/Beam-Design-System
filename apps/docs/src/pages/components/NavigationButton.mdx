@@ -1,0 +1,31 @@
+import { NavigationButton } from '@sparc-ui';
+import { Folder, KeyRound, Settings } from 'lucide-react';
+
+<PageHeader
+  title="Navigation Button"
+  description="Atom — the compact interactive row used by Beam application navigation."
+/>
+
+## Default and selected
+
+<PreviewCard>
+  <div className="w-[200px] space-y-1 rounded bg-[#f5f5f5] p-2">
+    <NavigationButton label="Folder 001" leading={<Folder />} trailing={<span>4</span>} active />
+    <NavigationButton label="API Keys" leading={<KeyRound />} />
+    <NavigationButton label="Settings" leading={<Settings />} />
+  </div>
+</PreviewCard>
+
+## Collapsed
+
+<PreviewCard>
+  <div className="w-[42px] rounded bg-[#f5f5f5] p-2">
+    <NavigationButton label="API Keys" leading={<KeyRound />} collapsed />
+  </div>
+</PreviewCard>
+
+## Atomic role
+
+This atom owns row height, alignment, selection, hover, focus, disabled, icon,
+label, and trailing metadata. It does not own navigation grouping or sidebar layout.
+

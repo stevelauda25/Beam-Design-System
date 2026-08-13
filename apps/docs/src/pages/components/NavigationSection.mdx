@@ -1,0 +1,35 @@
+import { NavigationButton, NavSection } from '@sparc-ui';
+import { Folder, KeyRound, Settings } from 'lucide-react';
+
+<PageHeader
+  title="Navigation Section"
+  description="Molecule — groups related navigation buttons under a shared label or divider."
+/>
+
+## Labeled group
+
+<PreviewCard>
+  <div className="w-[200px] rounded bg-[#f5f5f5] p-2">
+    <NavSection label="Workspace">
+      <NavigationButton label="Folder 001" leading={<Folder />} trailing={<span>4</span>} active />
+      <NavigationButton label="Product Resources" leading={<Folder />} trailing={<span>3</span>} />
+    </NavSection>
+  </div>
+</PreviewCard>
+
+## Utility group
+
+<PreviewCard>
+  <div className="w-[200px] rounded bg-[#f5f5f5] p-2">
+    <NavSection divided>
+      <NavigationButton label="API Keys" leading={<KeyRound />} />
+      <NavigationButton label="Settings" leading={<Settings />} />
+    </NavSection>
+  </div>
+</PreviewCard>
+
+## Atomic role
+
+This molecule controls grouping, section labels, spacing, and optional division.
+Its interactive children remain independent Navigation Button atoms.
+

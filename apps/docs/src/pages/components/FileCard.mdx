@@ -1,0 +1,35 @@
+import { FileCard } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import documentIcon from '../../../../../../Beam-App-Project/public/assets/file-document.svg';
+
+export const DocumentIcon = () => <img src={documentIcon} alt="" />;
+
+<PageHeader title="File Card" description="One grid file card structure used throughout Beam-App-Project." />
+
+## States
+
+<PreviewCard compact tall>
+  <div className="flex items-start gap-8">
+    {['default', 'hover', 'pressed', 'selected', 'disabled'].map((state) => (
+      <div className="flex h-[128px] w-[136.667px] flex-col items-center gap-2" key={state}>
+        <FileCard preview={<DocumentIcon />} name="document.md" visualState={state} />
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">
+          {state[0].toUpperCase() + state.slice(1)}
+        </span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact>
+  <tbody>
+    <tr><th>Card size</th><td>136.667px × 102px</td></tr>
+    <tr><th>Preview region</th><td>63px × 80px</td></tr>
+    <tr><th>Document artwork</th><td>49.6px × 62px</td></tr>
+    <tr><th>Name region</th><td>22px high with 2px 8px padding</td></tr>
+    <tr><th>Radius</th><td>4px</td></tr>
+    <tr><th>Typography</th><td>Inter · 12px / 18px · Regular</td></tr>
+  </tbody>
+</PropsTable>

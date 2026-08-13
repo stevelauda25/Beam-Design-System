@@ -1,0 +1,29 @@
+import { Dialog } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import closeIcon from '../../../../../../Beam-App-Project/public/assets/preview-close.svg';
+import folderIcon from '../../../../../../Beam-App-Project/public/assets/folder.svg';
+
+export const CloseIcon = () => <img src={closeIcon} alt="" />;
+export const PrimaryIcon = () => <img src={folderIcon} alt="" />;
+
+<PageHeader title="Dialog" description="The standard dialog structure from Beam-App-Project." />
+
+## Standard
+
+<PreviewCard compact tall>
+  <div className="flex w-full items-start justify-center">
+    <div className="flex flex-col items-center gap-2">
+      <Dialog title="Create new folder" closeIcon={<CloseIcon />} primaryIcon={<PrimaryIcon />} primaryLabel="Add folder">Folder name</Dialog>
+      <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Standard</span>
+    </div>
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Width</th><td>400px</td></tr><tr><th>Outer padding</th><td>12px 8px 8px</td></tr>
+  <tr><th>Outer gap</th><td>12px</td></tr><tr><th>Outer radius</th><td>12px</td></tr>
+  <tr><th>Content padding</th><td>8px</td></tr><tr><th>Content radius</th><td>4px</td></tr>
+  <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

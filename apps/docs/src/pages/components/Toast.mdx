@@ -1,0 +1,40 @@
+import { Toast } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import successIcon from '../../../../../../Beam-App-Project/public/assets/toast-success.svg';
+import defaultIcon from '../../../../../../Beam-App-Project/public/assets/download-success.svg';
+import errorIcon from '../../../../../../Beam-App-Project/public/assets/preview-close.svg';
+
+export const icon = (variant) => <img src={variant === 'success' ? successIcon : variant === 'error' ? errorIcon : defaultIcon} alt="" />;
+
+<PageHeader title="Toast" description="The download and API-key feedback toast used in Beam-App-Project." />
+
+## Variants
+
+<PreviewCard compact extraTall>
+  <div className="grid w-full grid-cols-3 gap-8">
+    {['neutral','success','error'].map((variant) => (
+      <div className="flex flex-col items-center gap-2" key={variant}>
+        <Toast variant={variant} icon={icon(variant)} title={variant === 'success' ? 'API key created' : variant === 'error' ? 'Download failed' : 'Download complete'} description={variant === 'success' ? 'Production API was created successfully.' : variant === 'error' ? 'Couldn’t download document.md.' : 'document.md'} />
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{variant === 'neutral' ? 'Neutral' : variant[0].toUpperCase()+variant.slice(1)}</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## States
+
+<PreviewCard compact extraTall>
+  <div className="grid w-full grid-cols-3 gap-8">
+    <div className="flex flex-col items-center gap-2"><Toast icon={icon('neutral')} /><span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Visible</span></div>
+    <div className="flex flex-col items-center gap-2"><Toast variant="error" icon={icon('error')} title="Download failed" description="Couldn’t download document.md." onAction={() => {}} /><span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Action available</span></div>
+    <div className="flex h-[76px] flex-col items-center justify-end gap-2"><span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Dismissed</span></div>
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Width</th><td>310px</td></tr><tr><th>Padding</th><td>8px</td></tr>
+  <tr><th>Icon slot</th><td>18px with 12px icon</td></tr><tr><th>Gap</th><td>4px</td></tr>
+  <tr><th>Radius</th><td>6px</td></tr><tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

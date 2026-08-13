@@ -1,0 +1,43 @@
+import {
+  SparcFontPreview,
+  SparcSizeScale,
+  SparcWeights,
+} from '../../components/foundations/SparcFoundation';
+
+<PageHeader
+  title="Typography"
+  description="Beam typography variables from the Rhino Labs design foundation."
+/>
+
+## Font family
+
+Beam uses **TikTok Sans**, with Inter and system-font fallbacks when the font is
+not installed locally.
+
+<SparcFontPreview />
+
+Monospace content continues to use the platform monospace stack.
+
+## Size scale
+
+The Figma collection defines eleven tiers from `text-xs` to `display-2xl`.
+Text tiers and display-xs/sm use zero tracking; display-md through display-2xl
+use **-2%** tracking.
+
+<SparcSizeScale />
+
+## Weights
+
+<SparcWeights />
+
+Every size is available in Regular 400, Medium 500, Semibold 600, and Bold 700.
+
+## Root font-size — "THE ONE KNOB"
+
+Root font-size is fixed at **16px**. All component sizing is authored in rem
+against it, so the whole UI scales from that single value.
+
+## Source of truth
+
+Values on this page mirror the Figma Typography variable collection and its 44
+local text styles at node `369:4`.

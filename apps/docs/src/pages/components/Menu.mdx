@@ -1,0 +1,63 @@
+import { Menu, MenuGroup, MenuItem } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+
+export const CircleIcon = () => <span className="block size-3 rounded-full border border-current" />;
+
+<PageHeader title="Menu" description="Single-list and grouped-list menus from Beam-App-Project." />
+
+## Types
+
+<PreviewCard compact tall>
+  <div className="flex items-start gap-16">
+    <div className="flex h-[118px] flex-col items-center justify-between">
+      <Menu type="single">
+        <MenuItem icon={<CircleIcon />}>Menu item</MenuItem>
+      </Menu>
+      <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Single list</span>
+    </div>
+    <div className="flex h-[118px] flex-col items-center justify-between">
+      <Menu type="group">
+        <MenuGroup>
+          <MenuItem icon={<CircleIcon />} visualState="selected" indicator={<CircleIcon />}>Menu item</MenuItem>
+          <MenuItem icon={<CircleIcon />}>Menu item</MenuItem>
+          <MenuItem icon={<CircleIcon />}>Menu item</MenuItem>
+          <MenuItem icon={<CircleIcon />}>Menu item</MenuItem>
+        </MenuGroup>
+      </Menu>
+      <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Group list</span>
+    </div>
+  </div>
+</PreviewCard>
+
+## States
+
+<PreviewCard compact>
+  <div className="flex items-start gap-8">
+    {['default', 'hover', 'pressed', 'selected', 'disabled'].map((state) => (
+      <div className="flex h-[56px] w-[120px] flex-col items-center gap-2" key={state}>
+        <Menu type="single">
+          <MenuItem visualState={state} icon={<CircleIcon />} indicator={<CircleIcon />}>Menu item</MenuItem>
+        </Menu>
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">
+          {state[0].toUpperCase() + state.slice(1)}
+        </span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact>
+  <tbody>
+    <tr><th>Single width</th><td>120px</td></tr>
+    <tr><th>Grouped width</th><td>151px</td></tr>
+    <tr><th>Single item</th><td>116px × 26px</td></tr>
+    <tr><th>Grouped item</th><td>147px × 22px</td></tr>
+    <tr><th>Menu padding</th><td>2px</td></tr>
+    <tr><th>Group list</th><td>Four or more items in one menu surface</td></tr>
+    <tr><th>Icon</th><td>12px circle</td></tr>
+    <tr><th>Radius</th><td>6px menu · 4px item</td></tr>
+    <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+  </tbody>
+</PropsTable>

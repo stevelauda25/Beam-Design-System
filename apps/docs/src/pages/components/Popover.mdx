@@ -1,0 +1,29 @@
+import { SharePopover } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import pointer from '../../../../../../Beam-App-Project/public/assets/share-tooltip.svg';
+import documentIcon from '../../../../../../Beam-App-Project/public/assets/share-document.svg';
+import peopleIcon from '../../../../../../Beam-App-Project/public/assets/share-people.svg';
+import footerIcon from '../../../../../../Beam-App-Project/public/assets/share-chevron.svg';
+import avatar from '../../../../../../Beam-App-Project/public/assets/james-avatar.png';
+
+export const assets = { pointer:<img src={pointer} alt=""/>, documentIcon:<img src={documentIcon} alt=""/>, peopleIcon:<img src={peopleIcon} alt=""/>, footerIcon:<img src={footerIcon} alt=""/>, avatar:<img src={avatar} alt=""/> };
+
+<PageHeader title="Popover" description="The complete Share popover from Beam-App-Project." />
+
+## Open
+
+<PreviewCard compact extraTall noClip>
+  <div className="flex w-full flex-col items-center gap-2">
+    <SharePopover state="open" {...assets} />
+    <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">Open</span>
+  </div>
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Width</th><td>350px</td></tr><tr><th>Pointer</th><td>17px × 8.5px</td></tr>
+  <tr><th>Body padding</th><td>12px 8px</td></tr><tr><th>Body radius</th><td>6px</td></tr>
+  <tr><th>Member row</th><td>22px</td></tr><tr><th>Footer</th><td>27px</td></tr>
+  <tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>

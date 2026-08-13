@@ -1,0 +1,55 @@
+import {
+  SparcColorRamp,
+} from '../../components/foundations/SparcFoundation';
+
+<PageHeader
+  title="Color"
+  description="Beam color variables from the Rhino Labs design foundation."
+/>
+
+## Palette ramps
+
+The available palette ramps are rendered value-for-value from the shared token source.
+
+### Gray
+
+<SparcColorRamp ramp="gray" />
+
+### Accent / Gray Aqua
+
+<SparcColorRamp ramp="accent-gray-aqua" />
+
+### Neutral
+
+<SparcColorRamp ramp="neutral" />
+
+### Error
+
+<SparcColorRamp ramp="error" />
+
+### Info
+
+<SparcColorRamp ramp="info" />
+
+### Success
+
+<SparcColorRamp ramp="success" />
+
+### Warning
+
+<SparcColorRamp ramp="warning" />
+
+### Alpha / Black
+
+<SparcColorRamp ramp="alpha-black" />
+
+### Alpha / White
+
+<div className="rounded-lg bg-gray-900 p-3">
+  <SparcColorRamp ramp="alpha-white" />
+</div>
+
+## Source of truth
+
+Values on this page mirror the Figma Color variable collection at node `369:4`.
+Only variable families present in that collection are shown.

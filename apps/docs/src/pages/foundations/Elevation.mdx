@@ -1,0 +1,40 @@
+import { SparcShadowGrid } from '../../components/foundations/SparcFoundation';
+
+<PageHeader
+  title="Elevation"
+  description="Shadow tokens collected from the SPARC apps (carltonLaborPlanning globals.css, verified identical to beam-sparc-ui). Collected 2026-07-21."
+/>
+
+## Token shadows
+
+Six token shadows: three surface elevations (`elev-1`, `elev-2`, `pop`) using the
+warm charcoal `rgba(32,27,24,…)` base, and three component shadows registered
+2026-07-21 (`button`, `frame`, `card`).
+
+<SparcShadowGrid />
+
+| Token | Use |
+|---|---|
+| `shadow-elev-1` | cards |
+| `shadow-elev-2` | raised cards |
+| `shadow-pop` | modals |
+| `shadow-button` | button, segmented pill, date-picker Apply (6 layers incl. inset highlights) |
+| `shadow-frame` | dashboard frame surface — the #F7F7F7 container (3 layers + inset hairlines) |
+| `shadow-card` | white cards/panels inside the frame — kpi-card, dashboard panels, job cards (5 layers) |
+
+## Documented shadow recipes (not tokens)
+
+Two recipes remain in component code, documented here for reference:
+
+| Recipe | Used by |
+|---|---|
+| Popover/menu shadow (3 layers, all `rgba(0,0,0,0.05)`) | dropdowns, menus, date-picker card |
+| Chart tooltip shadow (6 layers) | chart-tooltip |
+| Chart tooltip shadow (6 layers) | chart-tooltip |
+
+## Source of truth
+
+Values on this page come from `apps/docs/src/data/sparc-foundation.json`, copied
+unchanged from the original collection (`design-system-testing-abdillah/foundation/tokens.json`,
+v0.2.0); recipes documented from `foundation.md` §3. This collection is this
+repo's token source.

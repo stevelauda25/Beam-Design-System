@@ -1,0 +1,35 @@
+import { Activity } from '@sparc-ui';
+import { PropsTable } from '../../components/docs/PropsTable';
+import activityLine from '../../../../../../Beam-App-Project/public/assets/activity-line.svg';
+
+export const Line = () => <img src={activityLine} alt="" />;
+export const item = (state) => ({ person:'Michele J.', action:'Viewed', time:'2h ago', detail:'folder.md · /folder.md', state });
+
+<PageHeader title="Activity" description="The timeline activity component used in Beam-App-Project." />
+
+## States
+
+<PreviewCard compact extraTall>
+  <div className="grid w-full grid-cols-3 gap-8">
+    {['default','current','completed'].map((state) => (
+      <div className="flex flex-col items-center gap-2" key={state}>
+        <Activity className="w-[260px]" items={[item(state)]} lineAsset={<Line />} />
+        <span className="text-xs leading-[18px] text-[rgb(var(--color-gray-600))]">{state[0].toUpperCase()+state.slice(1)} item</span>
+      </div>
+    ))}
+  </div>
+</PreviewCard>
+
+## Complete activity
+
+<PreviewCard compact extraTall>
+  <Activity className="w-[420px]" items={[item('current'), {...item('default'), time:'4h ago'}, {...item('completed'), time:'Yesterday'}]} lineAsset={<Line />} />
+</PreviewCard>
+
+## Specification
+
+<PropsTable compact><tbody>
+  <tr><th>Row height</th><td>78px</td></tr><tr><th>Track</th><td>16px</td></tr>
+  <tr><th>Dot</th><td>6px</td></tr><tr><th>Line</th><td>0.5px × 52px</td></tr>
+  <tr><th>Content gap</th><td>6px</td></tr><tr><th>Typography</th><td>TikTok Sans · 12px / 18px · Regular</td></tr>
+</tbody></PropsTable>
